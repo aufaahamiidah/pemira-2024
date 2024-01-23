@@ -15,16 +15,13 @@ return new class extends Migration
             $table->id();
             $table->enum('type' , ['bem' , 'bpm' , 'hmj']);
             $table->string('noUrut');
-            $table->string('nama_ketua')->nullable();
-            $table->string('nama_waketu')->nullable();
-            $table->string('nim_ketua')->nullable();
-            $table->string('nim_waketu')->nullable();
+            $table->string('nama')->nullable();
+            $table->string('nim')->nullable();
             $table->string('visi')->nullable();
             $table->string('misi')->nullable();
-            $table->string('idKelas_ketua')->nullable();
-            $table->string('idKelas_waketu')->nullable();
-            $table->string('foto_ketua')->nullable();
-            $table->string('foto_waketu')->nullable();
+            $table->string('kelas_id')->nullable();
+            $table->string('foto')->nullable();
+            $table->enum('jabatan', ['ketua', 'wakil'])->nullable();
             $table->timestamps();
         });
     }
