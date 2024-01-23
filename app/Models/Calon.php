@@ -15,6 +15,12 @@ class Calon extends Model
     public function user() : HasMany {
         return $this->HasMany(User::class);
     }
+    public function kelas_ketua() : BelongsTo {
+        return $this->BelongsTo(Kelas::class);
+    }
+    public function kelas_wakil() : BelongsTo {
+        return $this->BelongsTo(Kelas::class);
+    }
     public function kelas() : BelongsTo {
         return $this->BelongsTo(Kelas::class);
     }

@@ -64,7 +64,13 @@ class User extends Authenticatable
         return $this->BelongsTo(Jurusan::class);
     }
 
-    public function calon() : BelongsTo{
+    public function bem() : BelongsTo{
+        return $this->BelongsTo(Calon::class);
+    }
+    public function bpm() : BelongsTo{
+        return $this->BelongsTo(Calon::class);
+    }
+    public function hmj() : BelongsTo{
         return $this->BelongsTo(Calon::class);
     }
 

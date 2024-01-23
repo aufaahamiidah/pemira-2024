@@ -13,15 +13,18 @@ return new class extends Migration
     {
         Schema::create('calons', function (Blueprint $table) {
             $table->id();
-            $table->enum('type' , ['bem' , 'bpm' , 'hmj']);
-            $table->string('noUrut');
-            $table->string('nama')->nullable();
-            $table->string('nim')->nullable();
-            $table->string('visi')->nullable();
-            $table->string('misi')->nullable();
-            $table->string('kelas_id')->nullable();
-            $table->string('foto')->nullable();
-            $table->enum('jabatan', ['ketua', 'wakil'])->nullable();
+            $table->enum('type' , ['BEM' , 'BPM' , 'HMJ'])->nullable();
+            $table->string('no_urut');
+            $table->string('nama_ketua')->nullable();
+            $table->string('nama_wakil')->nullable();
+            $table->string('nim_ketua')->nullable();
+            $table->string('nim_wakil')->nullable();
+            $table->text('visi')->nullable();
+            $table->text('misi')->nullable();
+            $table->string('kelas_ketua_id')->nullable();
+            $table->string('kelas_wakil_id')->nullable();
+            $table->string('foto_ketua')->nullable();
+            $table->string('foto_wakil')->nullable();
             $table->timestamps();
         });
     }

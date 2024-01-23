@@ -48,6 +48,24 @@
             </form>
           </div>
         </div>
+        @if( session()->has('success'))
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+          {!! session('success') !!}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        @if( session()->has('delete'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {!! session('delete') !!}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        @if( session()->has('edit'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {!! session('edit') !!}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <div class="card-body table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -73,9 +91,9 @@
                     <td>{{ $user->pass }}</td>
                     <td>{{ $user->kelas->nama_kelas }}</td>
                     <td>{{ $user->jurusan->nama_jurusan }}</td>
-                    <td class="text-center">✅</td>
-                    <td class="text-center">✅</td>
-                    <td class="text-center">✅</td>
+                    <td class="text-center">{{ $user->bem->id ?? '☑️' }}</td>
+                    <td class="text-center">{{ $user->bpm->id ?? '☑️' }}</td>
+                    <td class="text-center">{{ $user->hmj->id ?? '☑️' }}</td>
                     <td class="text-center d-flex justify-content-center gap-1">
                       <button type="button" class="btn btn-sm rounded-pill btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $user->id }}">
                         <i class="bi bi-pencil-square"></i>Edit
@@ -162,9 +180,7 @@
     </div>
   </div>
 </div>
-@endforeach
 <!-- Modal Detele Mahasiswa -->
-@foreach ($users as $user)
 <div class="modal fade" id="deleteModal{{ $user->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
