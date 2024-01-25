@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             "nim"   => "4.42.21.0.29",
             "email"   => "dfahriyyan@gmail.com",
             "nohp"   => "088216542226",
-            "kelas_id"   => 1,
+            "kelas_id"   => 3,
             "jurusan_id"   => 1,
             "bem_id"   => 1,
             "bpm_id"   => 1,
@@ -35,18 +35,30 @@ class DatabaseSeeder extends Seeder
             "no_urut"    => 1,
             "type"      => "bem",
             "nama_ketua"=> "Valencia Dai Fahriyyan",
-            "kelas_ketua_id"=> 1,
+            "kelas_ketua_id"=> 3,
             "nim_ketua" => "4.42.21.0.29",
             "visi"      => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi omnis necessitatibus asperiores, delectus doloremque repellendus doloribus nulla possimus blanditiis ipsa aliquam sequi ad eos. Repudiandae.",
             "misi"      => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea quis, ex molestias sequi dolores, labore ipsum fugit a nam voluptates quo quisquam error quae. Vero enim voluptatum asperiores nobis! Facilis tempore facere hic sequi nulla esse fugiat cum explicabo repellendus, recusandae doloremque, temporibus modi totam? Possimus aliquam, a et fugiat nihil placeat. Officia ipsum voluptates neque maxime tempora fuga doloribus aliquam iste, eius tenetur ex unde odio necessitatibus dolor facere sint temporibus repudiandae ab mollitia aliquid explicabo molestias error, provident impedit! Doloribus voluptates possimus quasi praesentium, pariatur blanditiis sequi iste, architecto earum voluptatibus incidunt facilis expedita molestias numquam odio voluptate.",
             "nama_wakil"=> "Dinda Shinta Az-Zahra",
-            "kelas_wakil_id"=> 1,
+            "kelas_wakil_id"=> 3,
             "nim_wakil" => "4.42.21.0.09",
         ]);
 
         Kelas::create([
-            "nama_kelas" => "PS-3A",
+            "nama_kelas" => "PS-1A",
             "jurusan_id" => 1,
+        ]);
+        Kelas::create([
+            "nama_kelas" => "PS-2A",
+            "jurusan_id" => 2,
+        ]);
+        Kelas::create([
+            "nama_kelas" => "PS-3A",
+            "jurusan_id" => 3,
+        ]);
+        Kelas::create([
+            "nama_kelas" => "PS-4A",
+            "jurusan_id" => 4,
         ]);
 
         Jurusan::create([

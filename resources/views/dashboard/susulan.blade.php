@@ -20,7 +20,7 @@
                           <div class="dropdown open">
                             <b>Show</b>
                             <select class="btn border-secondary dropdown-toggle rounded-pill" name="show" value="PS-3A">
-                              <option class="dropdown-item" value="{{ request('show') }}">({{ request('show') ?? 'Show' }})</option>
+                              <option class="dropdown-item" value="{{ request('show') }}">{{ request('show') ?? 'Default' }}</option>
                                 <option class="dropdown-item" value="5">5</option>
                                 <option class="dropdown-item" value="10">10</option>
                                 <option class="dropdown-item" value="25">25</option>
@@ -33,7 +33,7 @@
                           <div class="dropdown open">
                               <b>Kelas</b>
                               <select class="btn border-secondary dropdown-toggle rounded-pill" name="kelas" value="PS-3A">
-                                  <option class="dropdown-item" value="{{ request('kelas') }}">({{ App\Models\Kelas::where('id', request('kelas'))->get()->first()->nama_kelas ?? 'Kelas' }})</option>
+                                  <option class="dropdown-item" value="{{ request('kelas') }}">{{ App\Models\Kelas::where('id', request('kelas'))->get()->first()->nama_kelas ?? 'Default' }}</option>
                                   <option class="dropdown-item" value="1">PS-1A</option>
                                   <option class="dropdown-item" value="2">PS-2A</option>
                                   <option class="dropdown-item" value="3">PS-3A</option>
@@ -117,11 +117,13 @@
                     </td>
                   </tr>
                   @endforeach
-                  {{-- @if ($users->count() == 0)
-                      <td colspan="11">
-                        <h3 class="text-center text-secondary">Data Tidak Ditemukan</h3>
-                      </td>
-                  @endif --}}
+                  @if ($users->count() == 0)
+                  <tr>
+                    <td colspan="11">
+                      <h3 class="text-center text-secondary">Data Tidak Tersedia</h3>
+                    </td>
+                  </tr>
+                  @endif
                 </tbody>
             </table>
             {{ $users->links() }}

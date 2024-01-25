@@ -20,7 +20,7 @@
                         <div class="dropdown open">
                           <b>Show</b>
                           <select class="btn border-secondary dropdown-toggle rounded-pill" name="show" value="PS-3A">
-                              <option class="dropdown-item" value="">default</option>
+                              <option class="dropdown-item" value="{{ request('show') }}">{{ request('show') ?? 'Default' }}</option>
                               <option class="dropdown-item" value="5">5</option>
                               <option class="dropdown-item" value="10">10</option>
                               <option class="dropdown-item" value="25">25</option>
@@ -33,7 +33,7 @@
                         <div class="dropdown open">
                             <b>Kelas</b>
                             <select class="btn border-secondary dropdown-toggle rounded-pill" name="kelas" value="PS-3A">
-                                <option class="dropdown-item" value="">default</option>
+                                <option class="dropdown-item" value="{{ request('kelas') }}">{{ App\Models\Kelas::where('id', request('kelas'))->get()->first()->nama_kelas ?? 'Default' }}</option>
                                 <option class="dropdown-item" value="1">PS-1A</option>
                                 <option class="dropdown-item" value="2">PS-2A</option>
                                 <option class="dropdown-item" value="3">PS-3A</option>
@@ -105,9 +105,11 @@
                   </tr>
                   @endforeach
                   @if ($users->count() == 0)
-                      <td colspan="10">
-                        <h3 class="text-center text-secondary">Data Tidak Ditemukan</h3>
-                      </td>
+                  <tr>
+                    <td colspan="10">
+                      <h3 class="text-center text-secondary">Data Tidak Tersedia</h3>
+                    </td>
+                  </tr>
                   @endif
                 </tbody>
             </table>
@@ -135,9 +137,9 @@
     </div>
   </div>
 </div>
-<!-- Modal Edit Mahasiswa -->
 
 @foreach ($users as $user)
+<!-- Modal Edit Mahasiswa -->
 <div class="modal fade" id="editModal{{ $user->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

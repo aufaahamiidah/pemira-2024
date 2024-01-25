@@ -54,10 +54,20 @@ class HomeController extends Controller
     }
 
     public function calon(){
+        if(request(['search', 'kelas', 'show'])){
+            // Jika Menggunakan Filter
+            // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
+            $users = Calon::with('kelas')->filter(request(['search', 'kelas']))->paginate((request('show')?? 10))->withQueryString();
+        } else {
+            // Jika tidak menggunakan Filter
+            $users = Calon::with('kelas')->paginate(10);
+        }
+
         return view("dashboard.calon", [
             "title"=> "Daftar Calon | Pemilihan Raya 2024",
             "active" => "calon",
-            "users" => Calon::get(),
+            "users" => $users,
+            "data"  => Calon::with('kelas'),
         ]);
     }
 }
