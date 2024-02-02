@@ -1,7 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 /* Halaman Utama */
 .baris-chart{
-    width: 100%; 
-    display: flex; 
-    justify-content: center; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
     gap: 150px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: #ccc;
+}
+
+/* LOGIN */
+.registrasi {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    width: 45%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 2px 10px 6px rgba(0, 0, 0, 0.1);
+    height: 70px;
+}
+
+/* card */
+.decision {
+    margin-top: 100px;
+}
+.card.calon-kahim:hover {
+    background-color: #001688;
+    color: white;
+}
+.calon-kahim {
+    width: 350px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* card bem bpm */
+.calon-item {
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.calon-header {
+    background-color: #001688;
+}
+
+.calon-item:hover {
+    background-color: #efefef;
 }
