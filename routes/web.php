@@ -42,3 +42,10 @@ Route::post('/daftar-calon/{id}/edit', [CalonController::class,'update'])->name(
 Route::get('/daftar-calon/delete/{id}', [CalonController::class,'destroy'])->name('Delete Data Calon');
 
 // Routing Pemilihan Raya 2024
+Route::get('/beranda', function (){
+    return view('pemilihan.beranda');
+});
+// Routing Pemilihan Raya 2024 Himpunan
+Route::get('/pemilihan/hmj/{id}', [HomeController::class,'tampilHMJ'])->name('Pemilihan Ketua Himpunan Mahasiswa Jurusan');
+Route::post('/pemilihan/hmj/submit', [CalonController::class,'submitHMJ'])->name('submitHMJ');
+

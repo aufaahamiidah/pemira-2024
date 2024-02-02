@@ -31,12 +31,12 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
 
-     
+
     // Import Data Mahasiswa Melalui Excel
     // Link Library https://docs.laravel-excel.com/3.1/imports/
     public function importMahasiswa(Request $request)
     {
-                
+
         // validasi
         $this->validate($request, [
             'file' => 'required|mimes:csv,xls,xlsx'
@@ -56,7 +56,7 @@ class UserController extends Controller
     }
     public function importSusulan(Request $request)
     {
-                
+
         // validasi
         $this->validate($request, [
             'file' => 'required|mimes:csv,xls,xlsx'
@@ -100,7 +100,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    // Mengedit Data Mahasiswa 
+    // Mengedit Data Mahasiswa
     public function update(Request $request, $id)
     {
         //
@@ -150,4 +150,15 @@ class UserController extends Controller
 
         return redirect(route('Daftar Mahasiswa Susulan'))->with('delete','Data Mahasiswa  Berhasil Dihapus');
     }
+
+    //Mengambil data calon Himpunan sesuai jurusan
+    public function tampilHimpunan($jurusan_id){
+        DB::table('calons')
+            ->join('kelas as k1', 'calons.kelas_ketua_id', '=', 'k1.id')
+            ->join('kelas as k2', 'calons.kelas_wakil_id', '=', 'k2.id')
+            ->select('calons.*', 'k1.nama_kelas')
+            ->get();
+    }
 }
+
+
