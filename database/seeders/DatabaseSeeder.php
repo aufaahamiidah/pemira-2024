@@ -30,6 +30,19 @@ class DatabaseSeeder extends Seeder
             "pass" => "ryan",
             "password" => "ryan",
         ]);
+        User::create([
+            "nama" => "Hussain",
+            "nim" => "4.33.22.0.09",
+            "email" => "hussain@dummy.com",
+            "nohp" => "08888888888",
+            "kelas_id" => 5,
+            "jurusan_id" => 3,
+            "bem_id" => 1,
+            "bpm_id" => 1,
+            "hmj_id" => 1,
+            "pass" => 123,
+            "password" => 123
+        ]);
 
         Calon::create([
             "no_urut"    => 1,
@@ -43,7 +56,18 @@ class DatabaseSeeder extends Seeder
             "kelas_wakil_id"=> 3,
             "nim_wakil" => "4.42.21.0.09",
         ]);
-
+        Calon::create([
+            "no_urut" => 3,
+            "type" => "hmj",
+            "nama_ketua" => "Hussain Tamam Gucci Al Fauzan",
+            "kelas_ketua_id" => 5,
+            "nim_ketua" => "4.33.22.0.09",
+            "visi" => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi omnis necessitatibus asperiores, delectus doloremque repellendus doloribus nulla possimus blanditiis ipsa aliquam sequi ad eos. Repudiandae.",
+            "misi" => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi omnis necessitatibus asperiores, delectus doloremque repellendus doloribus nulla possimus blanditiis ipsa aliquam sequi ad eos. Repudiandae.",
+            "nama_wakil" => "Bayu Tri Prayitno",
+            "kelas_wakil_id" => 5,
+            "nim_wakil" => "4.33.22.0.04",
+        ]);
         Kelas::create([
             "nama_kelas" => "PS-1A",
             "jurusan_id" => 1,
@@ -59,6 +83,10 @@ class DatabaseSeeder extends Seeder
         Kelas::create([
             "nama_kelas" => "PS-4A",
             "jurusan_id" => 4,
+        ]);
+        Kelas::create([
+            "nama_kelas" => "TI-2A",
+            "jurusan_id" => 3,
         ]);
 
         Jurusan::create([

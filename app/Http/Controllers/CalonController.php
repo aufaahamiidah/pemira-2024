@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Calon;
 use App\Imports\CalonImport;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -96,5 +97,19 @@ class CalonController extends Controller
         DB::table('calons')->where('id', $id)->delete();
 
         return redirect(route('Daftar Calon'))->with('delete','Data Calon Pemira Berhasil Dihapus');
+    }
+
+    //fungsi untuk submit hasil pilih pengguna
+    public function submitHMJ(Request $request){
+        $user = User::find(2);
+        dd($user);
+        $user->hmj_id = $request->hmj;
+        if($user->status == 'aktif'){
+            $user->suara = 'sah';
+        }else{
+            $user->suara = 'tidak';
+        }
+        $user->isActive = 0;
+        return redirect('/beranda');
     }
 }

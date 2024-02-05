@@ -7,6 +7,8 @@ use App\Models\Calon;
 use App\Models\Kelas;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -70,4 +72,43 @@ class HomeController extends Controller
             "data"  => Calon::with('kelas'),
         ]);
     }
+
+    public function tampilHMJ($id){
+        $user = User::find($id);
+        $kelas = $user->kelas;
+        $hmj = DB::table('calons')
+            ->join('kelas', 'calons.kelas_ketua_id', '=', 'kelas.id')
+            ->join('jurusans', 'kelas.jurusan_id', '=', 'jurusans.id')
+            ->where('kelas.jurusan_id', '=', $kelas->jurusan_id)
+            ->where('type', '=', 'hmj')
+            ->select('calons.*', 'kelas.nama_kelas', 'jurusans.nama_jurusan')
+            ->get();
+        return view('pemilihan.himpunan', compact('hmj'));
+    }
+
+    public function tampilBEM($id){
+        $user = User::find($id);
+        $kelas = $user->kelas;
+        $bem = DB::table('calons')
+            ->join('kelas as ketua', 'calons.kelas_ketua_id', '=', 'ketua.kodekelas')
+            ->join('kelas as wakil', 'calons.kelas_wakil_id','=', 'wakil.kodekelas')
+            ->join('jurusans', 'ketua.jurusan_id','=','jurusans.id')
+            ->where('type', '=','bem')
+            ->get();
+        return view('bem', compact('bem'));
+    }
+
+    public function tampilBPM($id){
+        $user = User::find($id);
+        $kelas = $user->kelas;
+        $bpm = DB::table('calons')
+            ->join('kelas', 'calon.kelas_ketua_id', '=', 'kelas.id')
+            ->join('jurusans','kelas.jurusan_id','=','jurusans.id')
+            ->where('kelas.jurusan_id','=',$kelas->jurusan_id)
+            ->where('type', '=', 'bpm')
+            ->select('calons.*', 'kelas.nama_kelas','jurusans.nama_jurusan')
+            ->get();
+        return view('bpm', compact('bpm'));
+    }
+
 }
