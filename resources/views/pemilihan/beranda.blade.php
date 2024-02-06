@@ -4,7 +4,7 @@
     <div class="decision row gx-5">
         <div class="col">
             <div class="p-3">
-                <a href="#" style="text-decoration: none">
+                <a href="pemilihan/bem/1" style="text-decoration: none">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <h3 class="card-title" style="font-weight: bold;">BEM</h3>
@@ -15,7 +15,7 @@
         </div>
         <div class="col">
             <div class="p-3">
-                <a href="#" style="text-decoration: none">
+                <a href="pemilihan/bpm/1" style="text-decoration: none">
                   <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <h3 class="card-title" style="font-weight: bold;">BPM</h3>
@@ -26,7 +26,7 @@
         </div>
         <div class="col">
             <div class="p-3">
-                <a href="pemilihan/hmj/1" style="text-decoration: none;">
+                <a href="pemilihan/hmj/2" style="text-decoration: none;">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <h3 class="card-title" style="font-weight: bold;">HIMPUNAN</h3>

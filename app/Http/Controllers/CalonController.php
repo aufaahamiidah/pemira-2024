@@ -102,14 +102,39 @@ class CalonController extends Controller
     //fungsi untuk submit hasil pilih pengguna
     public function submitHMJ(Request $request){
         $user = User::find(2);
-        dd($user);
         $user->hmj_id = $request->hmj;
-        if($user->status == 'aktif'){
-            $user->suara = 'sah';
-        }else{
-            $user->suara = 'tidak';
-        }
-        $user->isActive = 0;
+
+//        if($user->status == 'aktif'){
+//            $user->suara = 'sah';
+//        }else{
+//            $user->suara = 'tidak';
+//        }
+        $user->is_active = '0';
+        $user->update();
+        return redirect('/beranda');
+    }
+    public function submitBEM(Request $request){
+        $user = User::find(1);
+        $user->bem_id = $request->bem;
+//        if($user->status == 'aktif'){
+//            $user->suara = 'sah';
+//        }else{
+//            $user->suara = 'tidak';
+//        }
+        $user->is_active = '0';
+        $user->update();
+        return redirect('/beranda');
+    }
+    public function submitBPM(Request $request){
+        $user = User::find(1);
+        $user->bpm_id = $request->bpm;
+//        if($user->status == 'aktif'){
+//            $user->suara = 'sah';
+//        }else{
+//            $user->suara = 'tidak';
+//        }
+        $user->is_active = '0';
+        $user->update();
         return redirect('/beranda');
     }
 }

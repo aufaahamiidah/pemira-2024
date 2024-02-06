@@ -90,25 +90,25 @@ class HomeController extends Controller
         $user = User::find($id);
         $kelas = $user->kelas;
         $bem = DB::table('calons')
-            ->join('kelas as ketua', 'calons.kelas_ketua_id', '=', 'ketua.kodekelas')
-            ->join('kelas as wakil', 'calons.kelas_wakil_id','=', 'wakil.kodekelas')
+            ->join('kelas as ketua', 'calons.kelas_ketua_id', '=', 'ketua.id')
+            ->join('kelas as wakil', 'calons.kelas_wakil_id','=', 'wakil.id')
             ->join('jurusans', 'ketua.jurusan_id','=','jurusans.id')
             ->where('type', '=','bem')
             ->get();
-        return view('bem', compact('bem'));
+        return view('pemilihan.bem', compact('bem'));
     }
 
     public function tampilBPM($id){
         $user = User::find($id);
         $kelas = $user->kelas;
         $bpm = DB::table('calons')
-            ->join('kelas', 'calon.kelas_ketua_id', '=', 'kelas.id')
-            ->join('jurusans','kelas.jurusan_id','=','jurusans.id')
-            ->where('kelas.jurusan_id','=',$kelas->jurusan_id)
+            ->join('kelas', 'calons.kelas_ketua_id', '=', 'kelas.id')
+            ->join('jurusans', 'kelas.jurusan_id', '=', 'jurusans.id')
+            ->where('kelas.jurusan_id', '=', $kelas->jurusan_id)
             ->where('type', '=', 'bpm')
-            ->select('calons.*', 'kelas.nama_kelas','jurusans.nama_jurusan')
+            ->select('calons.*', 'kelas.nama_kelas', 'jurusans.nama_jurusan')
             ->get();
-        return view('bpm', compact('bpm'));
+        return view('pemilihan.bpm', compact('bpm'));
     }
 
 }
