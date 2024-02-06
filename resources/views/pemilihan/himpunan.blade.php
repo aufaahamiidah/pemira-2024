@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="card-body text-center">
-                            <label>
+                            <label for="hmj_{{$x->id}}">
                                 <h5 class="card-title">{{$x->nama_ketua}}</h5>
                                 <h5 class="card-title">{{$x->nama_wakil}}</h5>
                                 <hr>
@@ -31,8 +31,7 @@
                                 <p class="card-text">{{$x->visi}}</p>
                                 <h6 class="card-text">Misi</h6>
                                 <p class="card-text">{{$x->misi}}</p>
-                            </label>
-                            <input class="form-check-input" type="radio" name="hmj" id="{{$x->id}}" value="{{$x->id}}">
+                            </label><input class="form-check-input" type="radio" name="hmj" id="hmj_{{$x->id}}" value="{{$x->id}}">
                         </div>
                     </div>
                 </div>

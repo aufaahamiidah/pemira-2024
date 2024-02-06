@@ -49,3 +49,10 @@ Route::get('/beranda', function (){
 Route::get('/pemilihan/hmj/{id}', [HomeController::class,'tampilHMJ'])->name('Pemilihan Ketua Himpunan Mahasiswa Jurusan');
 Route::post('/pemilihan/hmj/submit', [CalonController::class,'submitHMJ'])->name('submitHMJ');
 
+// Routing Pemilihan Raya 2024 BEM
+Route::get('/pemilihan/bem/{id}',[HomeController::class, 'tampilBEM'])->name('Pemilihan Presiden Mahasiswa');
+Route::post('/pemilihan/bem/submit', [CalonController::class, 'submitBEM'])->name('submitBEM');
+
+//Routing Pemilihan Raya 2024 BPM
+Route::get('/pemilihan/bpm/{id}', [HomeController::class, 'tampilBPM'])->name('Pemilihan Anggota Badan Perwakilan Mahasiswa');
+Route::post('/pemilihan/bpm/submit', [CalonController::class, 'submitBPM'])->name('submitBPM');
