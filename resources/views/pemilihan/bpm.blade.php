@@ -1,13 +1,15 @@
 @extends('layouts.main2')
 <main>
     @section('container_menu')
-        <div class="title">
-            <h5 style="font-weight: bold; text-align: center;">CALON PRESIDEN DAN WAKIL PRESIDEN MAHASISWA</h5>
-        </div>
-        <form action="{{route('submitBEM')}}" method="post">
+        <section>
+            <div class="my-4">
+                <h5 class="text-center fw-bold">CALON ANGGOTA BPM</h5>
+            </div>
+        </section>
+        <form action="{{route('submitBPM')}}" method="post">
             @csrf
             <div class="decision row gx-5">
-                @foreach($bem as $x)
+                @foreach($bpm as $x)
                     <div class="col">
                         <div class="p-3">
                             <div class="form-check card calon-kahim">
@@ -21,7 +23,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body text-center">
-                                    <label for="bem{{$x->id}}">
+                                    <label for="bpm_{{$x->id}}">
                                         <h5 class="card-title">{{$x->nama_ketua}}</h5>
                                         <h5 class="card-title">{{$x->nama_wakil}}</h5>
                                         <hr>
@@ -29,7 +31,7 @@
                                         <p class="card-text">{{$x->visi}}</p>
                                         <h6 class="card-text">Misi</h6>
                                         <p class="card-text">{{$x->misi}}</p>
-                                    </label><input class="form-check-input" type="radio" name="bem" id="bem{{$x->id}}" value="{{$x->id}}">
+                                    </label><input class="form-check-input" type="radio" name="bpm" id="bpm_{{$x->id}}" value="{{$x->id}}">
                                 </div>
                             </div>
                         </div>
@@ -38,6 +40,6 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
-    @endsection
 
+    @endsection
 </main>
