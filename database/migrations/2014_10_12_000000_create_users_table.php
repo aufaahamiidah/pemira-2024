@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('foto')->nullable();
             $table->enum('role' , ['mahasiswa' , 'panitia', 'admin'])->default('mahasiswa');
             $table->enum('status' , ['aktif' , 'tidak aktif'])->default('aktif');
-            $table->enum('is_active' , [1 , 0])->default(1);
+            $table->enum('is_active' , [1 , 0])->default(0);
             $table->string('pass');
             $table->string('password')->nullable();
             $table->rememberToken();

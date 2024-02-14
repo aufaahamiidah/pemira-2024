@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\UsersImportSusulan;
 use App\Models\User;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Imports\UsersImportSusulan;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -16,20 +18,67 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('auth.login', [
+            'title' => 'Login | Pemilihan Raya 2024'
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function register()
     {
-        //
+        return view('auth.register', [
+            'title' => 'Registration | Pemilihan Raya 2024'
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
+    public function store(){
+        $validator = request()->validate([
+            'name'      => 'required',
+            'password'  => 'required',
+            'konfirmasi'=> 'required|same:password'
+        ]);
+
+
+        User::create($validator);
+
+        return redirect('/login')->with('success', 'Berhasil Melakukan Registrasi!! silahkan Login');
+
+    }
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'nim' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect('/beranda');
+        }
+
+        return back()->with('error', 'Login Failed!! Please Retry Login');
+    }
+
+    // Melakukan Logout
+    public function logout(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
+
+
 
 
     // Import Data Mahasiswa Melalui Excel
@@ -72,7 +121,7 @@ class UserController extends Controller
         $file->move('file_susulan', $nama_file);
 
         Excel::import(new UsersImportSusulan, public_path("/file_susulan/$nama_file"));
-        return redirect('/daftar-mahasiswa')->with('success', 'Anda Telah Berhasil Melakukan Import Data Peserta Magang/Susulan Pemilihan Raya');
+        return redirect('/daftar-mahasiswa-susulan')->with('success', 'Anda Telah Berhasil Melakukan Import Data Peserta Magang/Susulan Pemilihan Raya');
     }
 
     /**
@@ -158,6 +207,23 @@ class UserController extends Controller
             ->join('kelas as k2', 'calons.kelas_wakil_id', '=', 'k2.id')
             ->select('calons.*', 'k1.nama_kelas')
             ->get();
+    }
+
+    // Update Foto Mahasiswa Magang
+    public function updateFoto(Request $request){
+
+        $id = Auth::user()->id;
+        $tujuan_upload = 'assets/foto_mahasiswa';
+
+        $file = $request->file;
+        $lokasi_file = time()."-".$file->getClientOriginalName();
+		$file->move($tujuan_upload,$lokasi_file);
+
+        User::where('id', $id)->update([
+            'foto' => $lokasi_file
+        ]);
+
+        return redirect(route('Beranda'));
     }
 }
 

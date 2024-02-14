@@ -45,7 +45,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Calon::create([
+            "no_urut" => 3,
+            'jurusan_id' => 3,
+            "type" => "hmj",
+            "nama_ketua" => "Hussain Tamam Gucci Al Fauzan",
+            "kelas_ketua_id" => 5,
+            "nim_ketua" => "4.33.22.0.09",
+            "visi" => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi omnis necessitatibus asperiores, delectus doloremque repellendus doloribus nulla possimus blanditiis ipsa aliquam sequi ad eos. Repudiandae.",
+            "misi" => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi omnis necessitatibus asperiores, delectus doloremque repellendus doloribus nulla possimus blanditiis ipsa aliquam sequi ad eos. Repudiandae.",
+            "nama_wakil" => "Bayu Tri Prayitno",
+            "kelas_wakil_id" => 5,
+            "nim_wakil" => "4.33.22.0.04",
+        ]);
+        Calon::create([
             "no_urut"    => 1,
+            'jurusan_id' => 1,
             "type"      => "bem",
             "nama_ketua"=> "Valencia Dai Fahriyyan",
             "kelas_ketua_id"=> 3,
@@ -57,15 +71,16 @@ class DatabaseSeeder extends Seeder
             "nim_wakil" => "4.42.21.0.09",
         ]);
         Calon::create([
-            "no_urut" => 3,
+            "no_urut" => 4,
+            'jurusan_id' => 5,
             "type" => "hmj",
-            "nama_ketua" => "Hussain Tamam Gucci Al Fauzan",
-            "kelas_ketua_id" => 5,
+            "nama_ketua" => "assdf",
+            "kelas_ketua_id" => 6,
             "nim_ketua" => "4.33.22.0.09",
             "visi" => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi omnis necessitatibus asperiores, delectus doloremque repellendus doloribus nulla possimus blanditiis ipsa aliquam sequi ad eos. Repudiandae.",
             "misi" => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi omnis necessitatibus asperiores, delectus doloremque repellendus doloribus nulla possimus blanditiis ipsa aliquam sequi ad eos. Repudiandae.",
-            "nama_wakil" => "Bayu Tri Prayitno",
-            "kelas_wakil_id" => 5,
+            "nama_wakil" => "asddf",
+            "kelas_wakil_id" => 6,
             "nim_wakil" => "4.33.22.0.04",
         ]);
         Kelas::create([
