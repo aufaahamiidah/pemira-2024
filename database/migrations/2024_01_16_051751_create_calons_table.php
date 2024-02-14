@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nim_wakil')->nullable();
             $table->text('visi')->nullable();
             $table->text('misi')->nullable();
+            $table->string('jurusan_id')->nullable();
             $table->string('kelas_ketua_id')->nullable();
             $table->string('kelas_wakil_id')->nullable();
             $table->string('foto_ketua')->nullable();

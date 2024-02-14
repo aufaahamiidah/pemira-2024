@@ -47,7 +47,7 @@ class CalonController extends Controller
         $file->move('file_calon', $nama_file);
 
         Excel::import(new CalonImport, public_path("/file_calon/$nama_file"));
-        return redirect('/daftar-calon')->with('success', 'Anda Telah Berhasil Melakukan Import Data Calon Pemilihan Raya 2024');
+        return redirect(route('Daftar Calon'))->with('success', 'Anda Telah Berhasil Melakukan Import Data Calon Pemilihan Raya 2024');
     }
 
     /**
@@ -111,7 +111,7 @@ class CalonController extends Controller
 //        }
         $user->is_active = '0';
         $user->update();
-        return redirect('/beranda');
+        return redirect('/beranda')->with('success', 'Anda Telah Berhasil Memilih');
     }
     public function submitBEM(Request $request){
         $user = User::find(1);
@@ -123,7 +123,7 @@ class CalonController extends Controller
 //        }
         $user->is_active = '0';
         $user->update();
-        return redirect('/beranda');
+        return redirect('/beranda')->with('success', 'Anda Telah Berhasil Memilih');
     }
     public function submitBPM(Request $request){
         $user = User::find(1);
@@ -135,6 +135,6 @@ class CalonController extends Controller
 //        }
         $user->is_active = '0';
         $user->update();
-        return redirect('/beranda');
+        return redirect('/beranda')->with('success', 'Anda Telah Berhasil Memilih');
     }
 }
