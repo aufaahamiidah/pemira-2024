@@ -16,6 +16,10 @@ class HomeController extends Controller
         return view("dashboard.index",[
             "title" => "Home | Pemilihan Raya 2024",
             "active" => "home",
+            "sudah_memilih"  => User::where('bem_id', '!=', null)->where('bpm_id', '!=', null)->where('hmj_id', '!=', null),
+            "belum_memilih"  => User::where('bem_id', '=', null)->where('bpm_id', '=', null)->where('hmj_id', '=', null),
+            "suara_sah"  => User::where('is_active', '=', '1'),
+            "suara_tidak_sah"  => User::where('is_active', '=', '0'),
         ]);
     }
 
@@ -90,25 +94,25 @@ class HomeController extends Controller
         $user = User::find($id);
         $kelas = $user->kelas;
         $bem = DB::table('calons')
-            ->join('kelas as ketua', 'calons.kelas_ketua_id', '=', 'ketua.id')
-            ->join('kelas as wakil', 'calons.kelas_wakil_id','=', 'wakil.id')
+            ->join('kelas as ketua', 'calons.kelas_ketua_id', '=', 'ketua.kodekelas')
+            ->join('kelas as wakil', 'calons.kelas_wakil_id','=', 'wakil.kodekelas')
             ->join('jurusans', 'ketua.jurusan_id','=','jurusans.id')
             ->where('type', '=','bem')
             ->get();
-        return view('pemilihan.bem', compact('bem'));
+        return view('bem', compact('bem'));
     }
 
     public function tampilBPM($id){
         $user = User::find($id);
         $kelas = $user->kelas;
         $bpm = DB::table('calons')
-            ->join('kelas', 'calons.kelas_ketua_id', '=', 'kelas.id')
-            ->join('jurusans', 'kelas.jurusan_id', '=', 'jurusans.id')
-            ->where('kelas.jurusan_id', '=', $kelas->jurusan_id)
+            ->join('kelas', 'calon.kelas_ketua_id', '=', 'kelas.id')
+            ->join('jurusans','kelas.jurusan_id','=','jurusans.id')
+            ->where('kelas.jurusan_id','=',$kelas->jurusan_id)
             ->where('type', '=', 'bpm')
-            ->select('calons.*', 'kelas.nama_kelas', 'jurusans.nama_jurusan')
+            ->select('calons.*', 'kelas.nama_kelas','jurusans.nama_jurusan')
             ->get();
-        return view('pemilihan.bpm', compact('bpm'));
+        return view('bpm', compact('bpm'));
     }
 
 }

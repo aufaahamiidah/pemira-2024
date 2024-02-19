@@ -10,7 +10,7 @@
         <canvas id="jmlSuaraSah"></canvas>
     </div>
 </div>
-    
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="path/to/chartjs/dist/chart.umd.js"></script>
 <script>
@@ -18,12 +18,12 @@
     const jmlSuaraSah = document.getElementById('jmlSuaraSah');
 
     new Chart(jmlP, {
-    type: 'pie',
+    type: 'doughnut',
     data: {
         labels: ['Sudah Memilih', 'Belum Memilih'],
         datasets: [{
         label: 'Jumlah Mahasiswa',
-        data: [6000, 243],
+        data: [{{ $sudah_memilih->count() }}, {{ $belum_memilih->count() }}],
         borderWidth: 1,
         backgroundColor:['#36a2eb', '#ff6384']
         }]
@@ -37,12 +37,12 @@
     }
     });
     new Chart(jmlSuaraSah, {
-    type: 'pie',
+    type: 'doughnut',
     data: {
         labels: ['Suara Sah', 'Suara Tidak Sah'],
         datasets: [{
         label: 'Jumlah Mahasiswa',
-        data: [6000, 243],
+        data: [{{ $suara_sah->count() }}, {{ $suara_tidak_sah->count() }}],
         backgroundColor: ['#ffce56', '#cc65fe']
         }]
     },

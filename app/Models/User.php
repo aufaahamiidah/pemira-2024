@@ -58,7 +58,7 @@ class User extends Authenticatable
     ];
 
     // Membuat Realtionship Database BelongsTo
-    // BelongsTo Fungsinya untuk Menerima Umpan Balik dari Suatu Model atau Table Database. 
+    // BelongsTo Fungsinya untuk Menerima Umpan Balik dari Suatu Model atau Table Database.
     // Sebelum Mengidentifikasikan BelongsTo harus Mengidentifikasikan HasOne atau HasMany dari Model Terkait dahulu.
     public function jurusan() : BelongsTo{
         return $this->BelongsTo(Jurusan::class);

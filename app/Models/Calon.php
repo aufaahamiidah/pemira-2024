@@ -37,7 +37,7 @@ class Calon extends Model
     public function kelas() : BelongsTo {
         return $this->BelongsTo(Kelas::class);
     }
-    
+
     // membuat Query Scope Filter
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, function($query, $search){
@@ -47,8 +47,8 @@ class Calon extends Model
                     ->orWhere('nim_wakil', 'like', "%$search%");
         });
         $query->when($filters["kelas"] ?? false, function($query, $search){
-            return $query->where('kelas_ketua_id', "%$search%")
-                    ->orWhere('kelas_wakil_id', "%$search%");
+            return $query->where('kelas_ketua_id', $search)
+                    ->orWhere('kelas_wakil_id', $search);
         });
     }
 }
