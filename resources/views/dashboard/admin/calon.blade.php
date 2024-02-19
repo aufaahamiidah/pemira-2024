@@ -1,4 +1,3 @@
-
 @extends('layouts.main') @section('container')
 
 <h2 class="text-center mt-5 title" style="border-bottom-color: blue;">Dashboard Panitia</h2>
@@ -138,12 +137,25 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="{{ route('Import Data Calon') }}" method="post" enctype="multipart/form-data">
-                <div class="modal-header">
+                <div class="modal-header bg-primary text-white">
                     <h1 class="modal-title fs-5" id="ImportLabel">Modal title</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     @csrf
+                    <b>
+                        <p>Catatan</p>
+                    </b>
+                    <p>Kolom 1 : Type Organisasi</p>
+                    <p>Kolom 2 : No Urut Paslon</p>
+                    <p>Kolom 3 : Nama Ketua Paslon</p>
+                    <p>Kolom 4 : Nama Wakil Ketua Paslon</p>
+                    <p>Kolom 5 : NIM Ketua Paslon</p>
+                    <p>Kolom 6 : NIM Wakil Ketua Paslon</p>
+                    <p>Kolom 7 : Kelas Ketua Paslon</p>
+                    <p>Kolom 8 : Kelas Wakil Ketua Paslon</p>
+                    <p>Kolom 9 : Visi Paslon</p>
+                    <p>Kolom 10 : Misi Paslon</p>
                     <input class="form-control" type="file" name="file">
                 </div>
                 <div class="modal-footer">
