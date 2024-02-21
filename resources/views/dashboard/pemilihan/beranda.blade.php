@@ -75,7 +75,7 @@
                     <img src="assets/BEM.svg" width="150" alt="" class="mb-4">
                     <h5 style="font-weight: bold; text-align: center;">CALON PRESIDEN DAN WAKIL PRESIDEN MAHASISWA</h5>
                 </div>
-                <form action="{{ route('submitBEM') }}" method="post">
+                <form action="{{ route('submitBEM') }}" method="post" id="formBEM">
                     @csrf
                     <div class="decision row d-flex justify-content-center">
                         @foreach ($bem as $item)
@@ -108,7 +108,7 @@
                             </div>
                         </div>
                         @endforeach
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" onclick="submitBEM(event)" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
@@ -127,7 +127,7 @@
                     <img src="assets/BPM.svg" width="120" alt="" class="mb-4">
                     <h5 style="font-weight: bold; text-align: center;">CALON PRESIDEN DAN WAKIL PRESIDEN MAHASISWA</h5>
                 </div>
-                <form action="{{ route('submitBPM') }}" method="post">
+                <form action="{{ route('submitBPM') }}" method="post" id="formBPM">
                     @csrf
                     <div class="decision row">
                         @foreach ($bpm as $item)
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                         @endforeach
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" onclick="submitBPM(event)" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
@@ -189,7 +189,7 @@
                     @endif
                     <h5 style="font-weight: bold; text-align: center;">CALON PRESIDEN DAN WAKIL PRESIDEN MAHASISWA</h5>
                 </div>
-                <form action="{{ route('submitBPM') }}" method="post">
+                <form action="{{ route('submitBPM') }}" method="post" id="formHMJ">
                     @csrf
                     <div class="decision row">
                         @foreach ($hmj as $item)
@@ -222,7 +222,7 @@
                             </div>
                         </div>
                         @endforeach
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" onclick="submitHMJ(event)" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
@@ -230,3 +230,116 @@
     </div>
 </div>
 @endsection
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function submitBEM(e) {
+        e.preventDefault();
+
+        var bem = document.getElementsByName('bem');
+        var selectedBEM = false;
+        for (let i = 0; i < bem.length; i++) {
+            if (bem[i].checked) {
+                selectedBEM = true;
+                break;
+            }
+        }
+        //Tampilkan pesan error jika tidak ada pilihan
+        if(!selectedBEM){
+            Swal.fire({
+                icon: 'error',
+                title: 'Pilihan Presma Wapresma belum dipilih',
+                text: 'Mohon pilih salah satu',
+            });
+            return;
+        }
+
+        //konfirmasi ulang pilihan
+        Swal.fire({
+            title: 'KONFIRMASI PILIHAN ANDA',
+            buttons: {
+                konfirmasi: {
+                    text: 'Konfirmasi',
+                    value: true
+                },
+                cancel: "Ulangi"
+            }
+        }).then((result) => {
+            if (result) {
+                Swal.fire('Terimakasih Telah Berpartisipasi', '', 'success');
+                document.getElementById("formBEM").submit();
+            }
+        });
+    }
+
+    function submitBPM(e){
+        var bpm = document.getElementsByName('bpm');
+        var selectedBPM = false;
+        for (let i = 0; i < bpm.length; i++) {
+            if (bpm[i].checked) {
+                selectedBPM = true;
+                break;
+            }
+        }
+
+        //Tampilkan pesan error jika tidak ada pilihan
+        if(!selectedBPM){
+            swal({
+                icon: 'error',
+                title: 'Pilihan BPM belum dipilih',
+                text: 'Mohon pilih salah satu',
+            });
+            return;
+        }
+        //konfirmasi ulang pilihan
+        Swal.fire({
+            title: 'KONFIRMASI PILIHAN ANDA',
+            buttons: {
+                konfirmasi: {
+                    text: 'Konfirmasi',
+                    value: true
+                },
+                cancel: "Ulangi"
+            }
+        }).then((result) => {
+            if (result) {
+                Swal.fire('Terimakasih Telah Berpartisipasi', '', 'success');
+                document.getElementById("formBPM").submit();
+            }
+        });
+    }
+    function submitHMJ(e) {
+        var hmj = document.getElementsByName('hmj');
+        var selectedHMJ = false;
+        for (let i = 0; i < hmj.length; i++) {
+            if (hmj[i].checked) {
+                selectedHMJ = true;
+                break;
+            }
+        }
+        if (!selectedHMJ) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Pilihan Ketua Himpunan belum dipilih',
+                text: 'Mohon pilih salah satu',
+            });
+            return;
+
+        }
+        //konfirmasi ulang pilihan
+        Swal.fire({
+            title: 'KONFIRMASI PILIHAN ANDA',
+            buttons: {
+                konfirmasi: {
+                    text: 'Konfirmasi',
+                    value: true
+                },
+                cancel: "Ulangi"
+            }
+        }).then((result) => {
+            if (result) {
+                Swal.fire('Terimakasih Telah Berpartisipasi', '', 'success');
+                document.getElementById("formHMJ").submit();
+            }
+        });
+    }
+</script>
