@@ -129,7 +129,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $users->links() }}
+        {{-- {{ $users->links() }} --}}
     </div>
 </div>
 <!-- Modal Import Data Calon -->

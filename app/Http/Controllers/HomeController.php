@@ -50,10 +50,10 @@ class HomeController extends Controller
         if (request(['search', 'kelas', 'show'])) {
             // Jika Menggunakan Filter
             // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
-            $users = User::with('kelas', 'jurusan', 'calon')->where('status', 'tidak aktif')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
+            $users = User::with('kelas', 'jurusan')->where('status', 'tidak aktif')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
         } else {
             // Jika tidak menggunakan Filter
-            $users = User::with('kelas', 'jurusan', 'calon')->where('status', 'tidak aktif')->paginate(10);
+            $users = User::with('kelas', 'jurusan')->where('status', 'tidak aktif')->paginate(10);
         }
 
         return view("dashboard.admin.susulan", [
@@ -68,10 +68,10 @@ class HomeController extends Controller
         if (request(['search', 'kelas', 'show'])) {
             // Jika Menggunakan Filter
             // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
-            $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->get()->all();
+            $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
         } else {
             // Jika tidak menggunakan Filter
-            $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->get()->all();
+            $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->paginate(10);
         }
 
         // dd($users[0]->kelas_ketua->nama_kelas);
@@ -105,7 +105,7 @@ class HomeController extends Controller
             'user' => User::with('jurusan', 'kelas')
                 ->where('jurusan_id', Auth::user()->jurusan_id)
                 ->get()
-                ->first()->kelas->jurusan->id,
+                ->first(),
         ]);
     }
 

@@ -30,7 +30,10 @@
                     {{ Auth::user()->nama }}
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item text-danger" href="#"><b>Logout</b></a></li>
+                    <form action="{{ route('Logout') }}" method="POST">
+                        @csrf
+                        <li><button type="submit" class="dropdown-item text-danger" href="#"><b>Logout</b></button></li>
+                    </form>
                 </ul>
             </div>
         </div>

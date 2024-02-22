@@ -29,10 +29,10 @@ class Calon extends Model
         return $this->HasMany(User::class);
     }
     public function kelas_ketua() : BelongsTo {
-        return $this->BelongsTo(Kelas::class);
+        return $this->BelongsTo(Kelas::class, 'kelas_ketua_id');
     }
     public function kelas_wakil() : BelongsTo {
-        return $this->BelongsTo(Kelas::class);
+        return $this->BelongsTo(Kelas::class, 'kelas_wakil_id');
     }
     public function kelas() : BelongsTo {
         return $this->BelongsTo(Kelas::class);

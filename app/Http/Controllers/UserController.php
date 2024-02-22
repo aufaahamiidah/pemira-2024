@@ -61,7 +61,11 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('/beranda');
+            if(Auth::user()->role == 'mahasiswa'){
+                return redirect('/beranda');
+            }else{
+                return redirect('/home');
+            }
         }
 
         return back()->with('error', 'Login Failed!! Please Retry Login');

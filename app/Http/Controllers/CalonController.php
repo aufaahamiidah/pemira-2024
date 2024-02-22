@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Calon;
 use App\Imports\CalonImport;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CalonController extends Controller
@@ -100,41 +101,14 @@ class CalonController extends Controller
     }
 
     //fungsi untuk submit hasil pilih pengguna
-    public function submitHMJ(Request $request){
-        $user = User::find(2);
-        $user->hmj_id = $request->hmj;
-
-//        if($user->status == 'aktif'){
-//            $user->suara = 'sah';
-//        }else{
-//            $user->suara = 'tidak';
-//        }
-        $user->is_active = '0';
-        $user->update();
+    public function submitPilihan(Request $request){
+        User::where('id', Auth::user()->id)->update([
+            'bem_id' => $request->bem,
+            'bpm_id' => $request->bpm,
+            'hmj_id' => $request->hmj,
+            'is_active' => '1',
+        ]);
         return redirect('/beranda')->with('success', 'Anda Telah Berhasil Memilih');
-    }
-    public function submitBEM(Request $request){
-        $user = User::find(1);
-        $user->bem_id = $request->bem;
-//        if($user->status == 'aktif'){
-//            $user->suara = 'sah';
-//        }else{
-//            $user->suara = 'tidak';
-//        }
-        $user->is_active = '0';
-        $user->update();
-        return redirect('/beranda')->with('success', 'Anda Telah Berhasil Memilih');
-    }
-    public function submitBPM(Request $request){
-        $user = User::find(1);
-        $user->bpm_id = $request->bpm;
-//        if($user->status == 'aktif'){
-//            $user->suara = 'sah';
-//        }else{
-//            $user->suara = 'tidak';
-//        }
-        $user->is_active = '0';
-        $user->update();
-        return redirect('/beranda')->with('success', 'Anda Telah Berhasil Memilih');
+        
     }
 }

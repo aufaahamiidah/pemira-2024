@@ -64,5 +64,7 @@ Route::middleware('auth')->group(function () {
     //Routing Pemilihan Raya 2024 BPM
     Route::get('/pemilihan/bpm/{id}', [HomeController::class, 'tampilBPM'])->name('Pemilihan Anggota Badan Perwakilan Mahasiswa');
     Route::post('/pemilihan/bpm/submit', [CalonController::class, 'submitBPM'])->name('submitBPM');
+
+    Route::post('/pemilihan/submit', [CalonController::class, 'submitPilihan'])->name('submitPilihan');
 });
 
