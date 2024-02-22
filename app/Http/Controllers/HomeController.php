@@ -15,72 +15,89 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view("dashboard.admin.index", [
-            "title" => "Home | Pemilihan Raya 2024",
-            "active" => "home",
-            "sudah_memilih"  => User::where('bem_id', '!=', null)->where('bpm_id', '!=', null)->where('hmj_id', '!=', null),
-            "belum_memilih"  => User::where('bem_id', '=', null)->where('bpm_id', '=', null)->where('hmj_id', '=', null),
-            "suara_sah"  => User::where('is_active', '=', '1'),
-            "suara_tidak_sah"  => User::where('is_active', '=', '0'),
-        ]);
+        if(Auth::user()->role == 'mahasiswa'){
+            return redirect(route('Beranda'));
+        } else {
+            return view("dashboard.admin.index", [
+                "title" => "Home | Pemilihan Raya 2024",
+                "active" => "home",
+                "sudah_memilih"  => User::where('bem_id', '!=', null)->where('bpm_id', '!=', null)->where('hmj_id', '!=', null),
+                "belum_memilih"  => User::where('bem_id', '=', null)->where('bpm_id', '=', null)->where('hmj_id', '=', null),
+                "suara_sah"  => User::where('is_active', '=', '1'),
+                "suara_tidak_sah"  => User::where('is_active', '=', '0'),
+            ]);
+        }
     }
 
     public function mahasiswa(Request $request)
     {
-        // Membuat Sebuah Fitur Filter. dengan Menggunakan Query Scope. => Cek Models
-        if (request(['search', 'kelas', 'show'])) {
-            // Jika Menggunakan Filter
-            // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
-            $users = User::with('kelas', 'jurusan', 'bem')->where('status', 'aktif')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 100))->withQueryString();
+        
+        if(Auth::user()->role == 'mahasiswa'){
+            return redirect(route('Beranda'));
         } else {
-            // Jika tidak menggunakan Filter
-            $users = User::with('kelas', 'jurusan', 'bem')->where('status', 'aktif')->paginate(100);
+            // Membuat Sebuah Fitur Filter. dengan Menggunakan Query Scope. => Cek Models
+            if (request(['search', 'kelas', 'show'])) {
+                // Jika Menggunakan Filter
+                // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
+                $users = User::with('kelas', 'jurusan', 'bem')->where('status', 'aktif')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 100))->withQueryString();
+            } else {
+                // Jika tidak menggunakan Filter
+                $users = User::with('kelas', 'jurusan', 'bem')->where('status', 'aktif')->paginate(100);
+            }
+    
+            return view("dashboard.admin.mahasiswa", [
+                "title" => "Daftar Mahasiswa | Pemilihan Raya 2024",
+                "active" => "mahasiswa",
+                "users" => $users,
+            ]);
         }
-
-        return view("dashboard.admin.mahasiswa", [
-            "title" => "Daftar Mahasiswa | Pemilihan Raya 2024",
-            "active" => "mahasiswa",
-            "users" => $users,
-        ]);
     }
 
     public function susulan()
     {
-        // Membuat Sebuah Fitur Filter. dengan Menggunakan Query Scope. => Cek Models
-        if (request(['search', 'kelas', 'show'])) {
-            // Jika Menggunakan Filter
-            // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
-            $users = User::with('kelas', 'jurusan')->where('status', 'tidak aktif')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
+        if(Auth::user()->role == 'mahasiswa'){
+            return redirect(route('Beranda'));
         } else {
-            // Jika tidak menggunakan Filter
-            $users = User::with('kelas', 'jurusan')->where('status', 'tidak aktif')->paginate(10);
+            // Membuat Sebuah Fitur Filter. dengan Menggunakan Query Scope. => Cek Models
+            if (request(['search', 'kelas', 'show'])) {
+                // Jika Menggunakan Filter
+                // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
+                $users = User::with('kelas', 'jurusan')->where('status', 'tidak aktif')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
+            } else {
+                // Jika tidak menggunakan Filter
+                $users = User::with('kelas', 'jurusan')->where('status', 'tidak aktif')->paginate(10);
+            }
+    
+            return view("dashboard.admin.susulan", [
+                "title" => "Daftar Mahasiswa Susulan | Pemilihan Raya 2024",
+                "active" => "susulan",
+                "users" => $users,
+            ]);
         }
-
-        return view("dashboard.admin.susulan", [
-            "title" => "Daftar Mahasiswa Susulan | Pemilihan Raya 2024",
-            "active" => "susulan",
-            "users" => $users,
-        ]);
     }
 
     public function calon()
     {
-        if (request(['search', 'kelas', 'show'])) {
-            // Jika Menggunakan Filter
-            // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
-            $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
+        if(Auth::user()->role == 'mahasiswa'){
+            return redirect(route('Beranda'));
         } else {
-            // Jika tidak menggunakan Filter
-            $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->paginate(10);
+            if (request(['search', 'kelas', 'show'])) {
+                // Jika Menggunakan Filter
+                // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
+                $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
+            } else {
+                // Jika tidak menggunakan Filter
+                $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->paginate(10);
+            }
+    
+            // dd($users[0]->kelas_ketua->nama_kelas);
+            return view("dashboard.admin.calon", [
+                "title" => "Daftar Calon | Pemilihan Raya 2024",
+                "active" => "calon",
+                "users" => $users,
+                "data"  => Calon::with('kelas'),
+            ]);
         }
-
-        // dd($users[0]->kelas_ketua->nama_kelas);
-        return view("dashboard.admin.calon", [
-            "title" => "Daftar Calon | Pemilihan Raya 2024",
-            "active" => "calon",
-            "users" => $users,
-            "data"  => Calon::with('kelas'),
-        ]);
     }
 
     public function uploadFoto()
@@ -90,23 +107,28 @@ class HomeController extends Controller
 
     public function beranda()
     {
-        return view('dashboard.pemilihan.beranda', [
-            'bem' => Calon::with('kelas_ketua', 'kelas')
-                ->where('type', 'bem')
-                ->get(),
-            'bpm' => Calon::with('kelas_ketua')
-                ->where('type', 'bpm')
-                ->where('jurusan_id', Auth::user()->jurusan_id)
-                ->get(),
-            'hmj' => Calon::with('kelas_ketua', 'kelas')
-                ->where('type', 'hmj')
-                ->where('jurusan_id', Auth::user()->jurusan_id)
-                ->get(),
-            'user' => User::with('jurusan', 'kelas')
-                ->where('jurusan_id', Auth::user()->jurusan_id)
-                ->get()
-                ->first(),
-        ]);
+        if(Auth::user()->role == 'mahasiswa'){
+            return view('dashboard.pemilihan.beranda', [
+                'title' => 'Pemilihan Raya 2024',
+                'bem' => Calon::with('kelas_ketua', 'kelas')
+                    ->where('type', 'bem')
+                    ->get(),
+                'bpm' => Calon::with('kelas_ketua')
+                    ->where('type', 'bpm')
+                    ->where('jurusan_id', Auth::user()->jurusan_id)
+                    ->get(),
+                'hmj' => Calon::with('kelas_ketua', 'kelas')
+                    ->where('type', 'hmj')
+                    ->where('jurusan_id', Auth::user()->jurusan_id)
+                    ->get(),
+                'user' => User::with('jurusan', 'kelas')
+                    ->where('jurusan_id', Auth::user()->jurusan_id)
+                    ->get()
+                    ->first(),
+            ]);
+        } else {
+            return redirect(route('home'));
+        }
     }
 
     public function tampilHMJ($id)
