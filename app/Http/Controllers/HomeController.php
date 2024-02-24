@@ -102,7 +102,9 @@ class HomeController extends Controller
 
     public function uploadFoto()
     {
-        return view('dashboard.pemilihan.upload_foto');
+        return view('dashboard.pemilihan.upload_foto',[
+            'title' => 'Upload Foto | Pemilihan Raya 2024'
+        ]);
     }
 
     public function beranda()
@@ -131,44 +133,44 @@ class HomeController extends Controller
         }
     }
 
-    public function tampilHMJ($id)
-    {
-        $user = User::find($id);
-        $kelas = $user->kelas;
-        $hmj = DB::table('calons')
-            ->join('kelas', 'calons.kelas_ketua_id', '=', 'kelas.id')
-            ->join('jurusans', 'kelas.jurusan_id', '=', 'jurusans.id')
-            ->where('kelas.jurusan_id', '=', $kelas->jurusan_id)
-            ->where('type', '=', 'hmj')
-            ->select('calons.*', 'kelas.nama_kelas', 'jurusans.nama_jurusan')
-            ->get();
-        return view('dashboard.pemilihan.himpunan', compact('hmj'));
-    }
+    // public function tampilHMJ($id)
+    // {
+    //     $user = User::find($id);
+    //     $kelas = $user->kelas;
+    //     $hmj = DB::table('calons')
+    //         ->join('kelas', 'calons.kelas_ketua_id', '=', 'kelas.id')
+    //         ->join('jurusans', 'kelas.jurusan_id', '=', 'jurusans.id')
+    //         ->where('kelas.jurusan_id', '=', $kelas->jurusan_id)
+    //         ->where('type', '=', 'hmj')
+    //         ->select('calons.*', 'kelas.nama_kelas', 'jurusans.nama_jurusan')
+    //         ->get();
+    //     return view('dashboard.pemilihan.himpunan', compact('hmj'));
+    // }
 
-    public function tampilBEM($id)
-    {
-        $user = User::find($id);
-        $kelas = $user->kelas;
-        $bem = DB::table('calons')
-            ->join('kelas as ketua', 'calons.kelas_ketua_id', '=', 'ketua.id')
-            ->join('kelas as wakil', 'calons.kelas_wakil_id', '=', 'wakil.id')
-            ->join('jurusans', 'ketua.jurusan_id', '=', 'jurusans.id')
-            ->where('type', '=', 'bem')
-            ->get();
-        return view('dashboard.pemilihan.bem', compact('bem'));
-    }
+    // public function tampilBEM($id)
+    // {
+    //     $user = User::find($id);
+    //     $kelas = $user->kelas;
+    //     $bem = DB::table('calons')
+    //         ->join('kelas as ketua', 'calons.kelas_ketua_id', '=', 'ketua.id')
+    //         ->join('kelas as wakil', 'calons.kelas_wakil_id', '=', 'wakil.id')
+    //         ->join('jurusans', 'ketua.jurusan_id', '=', 'jurusans.id')
+    //         ->where('type', '=', 'bem')
+    //         ->get();
+    //     return view('dashboard.pemilihan.bem', compact('bem'));
+    // }
 
-    public function tampilBPM($id)
-    {
-        $user = User::find($id);
-        $kelas = $user->kelas;
-        $bpm = DB::table('calons')
-            ->join('kelas', 'calon.kelas_ketua_id', '=', 'kelas.id')
-            ->join('jurusans','kelas.jurusan_id','=','jurusans.id')
-            ->where('kelas.jurusan_id','=',$kelas->jurusan_id)
-            ->where('type', '=', 'bpm')
-            ->select('calons.*', 'kelas.nama_kelas','jurusans.nama_jurusan')
-            ->get();
-        return view('dashboard.pemilihan.bpm', compact('bpm'));
-    }
+    // public function tampilBPM($id)
+    // {
+    //     $user = User::find($id);
+    //     $kelas = $user->kelas;
+    //     $bpm = DB::table('calons')
+    //         ->join('kelas', 'calon.kelas_ketua_id', '=', 'kelas.id')
+    //         ->join('jurusans','kelas.jurusan_id','=','jurusans.id')
+    //         ->where('kelas.jurusan_id','=',$kelas->jurusan_id)
+    //         ->where('type', '=', 'bpm')
+    //         ->select('calons.*', 'kelas.nama_kelas','jurusans.nama_jurusan')
+    //         ->get();
+    //     return view('dashboard.pemilihan.bpm', compact('bpm'));
+    // }
 }

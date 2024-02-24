@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CalonController;
+use App\Http\Controllers\KelasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -50,6 +51,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/import-calon', [CalonController::class,'import'])->name('Import Data Calon');
     Route::post('/daftar-calon/{id}/edit', [CalonController::class,'update'])->name('Update Data Calon');
     Route::get('/daftar-calon/delete/{id}', [CalonController::class,'destroy'])->name('Delete Data Calon');
+
+    // Daftar Kelas
+    Route::get('/daftar-kelas', [KelasController::class, 'index'])->name('Daftar Kelas');
+    Route::post('/import-kelas', [KelasController::class, 'store'])->name('Import Data Kelas');
 
     // Routing Pemilihan Raya 2024
     Route::get('/beranda', [HomeController::class, 'beranda'])->name('Beranda');

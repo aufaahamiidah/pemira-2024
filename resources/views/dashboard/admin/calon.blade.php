@@ -181,10 +181,10 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="row">
-                            <div class="col-4">
-                                <img src="" alt="Gambar Calon Pemira 2024">
+                            <div class="col-xl-6 col-sm-12">
+                                <img src="/assets/foto_calon/{{ $user->foto_ketua }}" alt="Gambar Calon Pemira 2024" style="width: 30vw; max-width: 250px; min-width: 100px;">
                             </div>
-                            <div class="col-8">
+                            <div class="col-xl-6 col-sm-12">
                                 <p><b>Nama Ketua</b> : <br> {{ $user->nama_ketua }}</p>
                                 <p><b>NIM Ketua</b> : <br> {{ $user->nim_ketua }}</p>
                                 <p><b>Kelas Ketua</b> : <br> {{ $user->kelas_ketua->nama_kelas }}</p>
@@ -193,10 +193,10 @@
                     </div>
                     <div class="col-6">
                         <div class="row">
-                            <div class="col-4">
-                                <img src="" alt="Gambar Calon Wakil Pemira 2024">
+                            <div class="col-xl-6 col-sm-12">
+                                <img src="/assets/foto_calon/{{ $user->foto_wakil }}" alt="Gambar Calon Wakil Pemira 2024" style="width: 30vw; max-width: 250px; min-width: 100px;">
                             </div>
-                            <div class="col-8">
+                            <div class="col-xl-6 col-sm-12">
                                 <p><b>Nama Wakil Ketua</b> : <br> {{ $user->nama_wakil }}</p>
                                 <p><b>NIM Wakil Ketua</b> : <br> {{ $user->nim_wakil }}</p>
                                 <p><b>Kelas Wakil Ketua</b> : <br> {{ $user->kelas_wakil->nama_kelas }}</p>
@@ -219,7 +219,7 @@
                 <h1 class="modal-title fs-5" id="editModalLabel">Edit Data Calon Pemira</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('Update Data Calon', $user->id) }}" method="post">
+            <form action="{{ route('Update Data Calon', $user->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="no_urut" value="{{ $user->no_urut }}">
@@ -250,6 +250,16 @@
                         <label for="nim_wakil" class="form-label">NIM Wakil Ketua :</label>
                         <input class="form-control mb-3" type="text" name="nim_wakil" id="nim_wakil"
                             value="{{ $user->nim_wakil }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="foto_ketua" class="form-label">Foto Ketua :</label>
+                        <input class="form-control mb-3" type="file" name="foto_ketua" id="foto_ketua"
+                            value="{{ $user->foto_ketua }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="foto_wakil" class="form-label">Foto Ketua :</label>
+                        <input class="form-control mb-3" type="file" name="foto_wakil" id="foto_wakil"
+                            value="{{ $user->foto_wakil }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="kelas_ketua" class="form-label">Kelas Ketua :</label>
@@ -299,6 +309,7 @@
         </div>
     </div>
 </div>
+@endforeach
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="path/to/chartjs/dist/chart.umd.js"></script>
@@ -326,5 +337,4 @@
     }
     });
 </script>
-@endforeach
 @endsection

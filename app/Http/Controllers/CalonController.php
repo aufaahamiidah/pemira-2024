@@ -73,6 +73,15 @@ class CalonController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $tujuan_upload = 'assets/foto_calon';
+        $foto_ketua = $request->foto_ketua;
+        $lokasi_file_ketua = time()."-".$foto_ketua->getClientOriginalName();
+		$foto_ketua->move($tujuan_upload,$lokasi_file_ketua);
+
+        $foto_wakil = $request->foto_wakil;
+        $lokasi_file_wakil = time()."-".$foto_wakil->getClientOriginalName();
+		$foto_wakil->move($tujuan_upload,$lokasi_file_wakil);
+
         DB::table('calons')->where('id', $id)->update([
             'nama_ketua'    => $request->nama_ketua,
             'nama_wakil'    => $request->nama_wakil,
@@ -80,6 +89,8 @@ class CalonController extends Controller
             'nim_wakil'     => $request->nim_wakil,
             'kelas_ketua_id'=> $request->kelas_ketua,
             'kelas_wakil_id'=> $request->kelas_wakil,
+            'foto_ketua'    => $lokasi_file_ketua,
+            'foto_wakil'    => $lokasi_file_wakil,
             'no_urut'       => $request->no_urut,
             'type'          => $request->type,
             'visi'          => $request->visi,

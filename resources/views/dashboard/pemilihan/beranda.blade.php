@@ -31,7 +31,7 @@
         
 <form action="{{ route('submitPilihan') }}" method="post" id="vote">
     @csrf
-    <button type="submit" class="btn btn-primary" onclick="konfirmasiPilihan(event)" role="button">Pilih</button>
+    <button type="submit" class="btn btn-success" onclick="konfirmasiPilihan(event)" role="button">Konfirmasi</button>
 </form>
         <div class="col">
             <div class="p-3">

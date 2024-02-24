@@ -106,9 +106,9 @@
                     <td>{{ $user->pass }}</td>
                     <td>{{ $user->kelas->nama_kelas }}</td>
                     <td>{{ $user->jurusan->nama_jurusan }}</td>
-                    <td class="text-center">✅</td>
-                    <td class="text-center">✅</td>
-                    <td class="text-center">✅</td>
+                    <td class="text-center">{{ $user->bem->id ?? '❌' }}</td>
+                    <td class="text-center">{{ $user->bpm->id ?? '❌' }}</td>
+                    <td class="text-center">{{ $user->hmj->id ?? '❌' }}</td>
                     <td class="text-center fw-bold {{ ($user->is_active == 1)? 'text-success' : 'text-danger' }}">{{
                         ($user->is_active == 1)? 'Suara Sah' : 'Suara Tidak Sah' }}</td>
                     <td class="text-center d-flex justify-content-center gap-1">
@@ -247,7 +247,7 @@
             <form action="{{ route('Verifikasi Data', $user->id) }}" method="post">
                 @csrf
                 <div class="modal-body">
-                    <img src="" alt="Gambar Bukti Mahasiswa"><br>
+                    <img src="/assets/foto_mahasiswa/{{ $user->foto }}" alt="Gambar Bukti Mahasiswa" style="width: 30vw; max-width: 450px; min-width: 230px;"><br>
                     <label for="suara" class="form-label">Status Suara :</label>
                     <select class="form-select mb-3" name="suara" id="suara" required>
                         <option value="1">Suara Sah</option>

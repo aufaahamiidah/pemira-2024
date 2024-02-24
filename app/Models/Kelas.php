@@ -25,4 +25,12 @@ class Kelas extends Model
     public function calon() : HasMany {
         return $this->HasMany( Calon::class);
     }
+
+    // membuat Query Scope Filter
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where('nama','like',"%$search%")
+                    ->orWhere('nama_kelas', 'like', "%$search%");
+        });
+    }
 }

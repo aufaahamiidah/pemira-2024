@@ -110,22 +110,27 @@ class DatabaseSeeder extends Seeder
             "nim_wakil" => "4.33.22.0.04",
         ]);
         Kelas::create([
+            'nama'       => 'Perbankan Syariah',
             "nama_kelas" => "PS-1A",
             "jurusan_id" => 1,
         ]);
         Kelas::create([
+            'nama'       => 'Perbankan Syariah',
             "nama_kelas" => "PS-2A",
             "jurusan_id" => 2,
         ]);
         Kelas::create([
+            'nama'       => 'Perbankan Syariah',
             "nama_kelas" => "PS-3A",
             "jurusan_id" => 3,
         ]);
         Kelas::create([
+            'nama'       => 'Perbankan Syariah',
             "nama_kelas" => "PS-4A",
             "jurusan_id" => 4,
         ]);
         Kelas::create([
+            'nama'       => 'Teknologi Informasi',
             "nama_kelas" => "TI-2A",
             "jurusan_id" => 3,
         ]);

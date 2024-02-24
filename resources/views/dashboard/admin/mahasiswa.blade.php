@@ -99,9 +99,9 @@
                     <td>{{ $user->pass }}</td>
                     <td>{{ $user->kelas->nama_kelas }}</td>
                     <td>{{ $user->jurusan->nama_jurusan }}</td>
-                    <td class="text-center">{{ $user->bem->id ?? '☑️' }}</td>
-                    <td class="text-center">{{ $user->bpm->id ?? '☑️' }}</td>
-                    <td class="text-center">{{ $user->hmj->id ?? '☑️' }}</td>
+                    <td class="text-center">{{ $user->bem->id ?? '❌' }}</td>
+                    <td class="text-center">{{ $user->bpm->id ?? '❌' }}</td>
+                    <td class="text-center">{{ $user->hmj->id ?? '❌' }}</td>
                     <td class="text-center d-flex justify-content-center gap-1">
                         <button type="button" class="btn btn-sm rounded-pill btn-warning" data-bs-toggle="modal"
                             data-bs-target="#editModal{{ $user->id }}">
