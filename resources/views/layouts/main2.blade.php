@@ -14,7 +14,7 @@
     @if (isset(Auth::user()->nama))
         @include('layouts.navbar_menu')  
     @endif
-    <div class="container my-2 pt-5">
+    <div class="container my-2 pt-5  d-flex justify-content-center align-items-center" style="min-height: 95vh">
         @yield('container_menu')
     </div>
 
