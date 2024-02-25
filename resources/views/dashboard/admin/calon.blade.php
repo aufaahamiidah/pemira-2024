@@ -1,6 +1,6 @@
 @extends('layouts.main') @section('container')
 
-<h2 class="text-center mt-5 title" style="border-bottom-color: blue;">Jumlah Organisasi</h2>
+<h2 class="text-center mt-5 title" style="border-bottom-color: blue;">Jumlah Calon</h2>
 <div class="row mt-4 baris-chart">
     <div class="col-6" style="width: 400px;">
         <canvas id="jmlPemilih"></canvas>
