@@ -18,6 +18,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::middleware('guest')->group(function () {
+    Route::get('/', [HomeController::class, 'welcome'])->name('Welcome To Pemira 2024');
     Route::get('/login', [UserController::class, 'index'])->name('login');
     Route::post('/authenticate', [UserController::class, 'authenticate'])->name('Authenticate');
     // Route::get('/signup', [UserController::class, 'register'])->name('Halaman Sign Up');

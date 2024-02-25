@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    public function welcome(){
+        return view('welcome', [
+            'title' => 'Welcome To Pemilihan Raya 2024'
+        ]);
+    }
+
     public function index()
     {
         if(Auth::user()->role == 'mahasiswa'){
