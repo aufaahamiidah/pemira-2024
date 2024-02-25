@@ -50,5 +50,8 @@ class Calon extends Model
             return $query->where('kelas_ketua_id', $search)
                     ->orWhere('kelas_wakil_id', $search);
         });
+        $query->when($filters["type"] ?? false, function($query, $search){
+            return $query->where('type', $search);
+        });
     }
 }

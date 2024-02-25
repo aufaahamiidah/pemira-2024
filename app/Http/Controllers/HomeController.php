@@ -93,10 +93,10 @@ class HomeController extends Controller
         if(Auth::user()->role == 'mahasiswa'){
             return redirect(route('Beranda'));
         } else {
-            if (request(['search', 'kelas', 'show'])) {
+            if (request(['search', 'type', 'kelas', 'show'])) {
                 // Jika Menggunakan Filter
                 // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
-                $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
+                $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->filter(request(['search', 'type', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
             } else {
                 // Jika tidak menggunakan Filter
                 $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->paginate(10);
@@ -114,32 +114,40 @@ class HomeController extends Controller
 
     public function uploadFoto()
     {
-        return view('dashboard.pemilihan.upload_foto',[
-            'title' => 'Upload Foto | Pemilihan Raya 2024'
-        ]);
+        if(Auth::user()->status == 'tidak aktif'){
+            return view('dashboard.pemilihan.upload_foto',[
+                'title' => 'Upload Foto | Pemilihan Raya 2024'
+            ]);
+        } else {
+            return redirect(route('Beranda'));
+        }
     }
 
     public function beranda()
     {
         if(Auth::user()->role == 'mahasiswa'){
-            return view('dashboard.pemilihan.beranda', [
-                'title' => 'Pemilihan Raya 2024',
-                'bem' => Calon::with('kelas_ketua', 'kelas')
-                    ->where('type', 'bem')
-                    ->get(),
-                'bpm' => Calon::with('kelas_ketua')
-                    ->where('type', 'bpm')
-                    ->where('jurusan_id', Auth::user()->jurusan_id)
-                    ->get(),
-                'hmj' => Calon::with('kelas_ketua', 'kelas')
-                    ->where('type', 'hmj')
-                    ->where('jurusan_id', Auth::user()->jurusan_id)
-                    ->get(),
-                'user' => User::with('jurusan', 'kelas')
-                    ->where('jurusan_id', Auth::user()->jurusan_id)
-                    ->get()
-                    ->first(),
-            ]);
+            if(Auth::user()->status == 'aktif'){
+                return view('dashboard.pemilihan.beranda', [
+                    'title' => 'Pemilihan Raya 2024',
+                    'bem' => Calon::with('kelas_ketua', 'kelas')
+                        ->where('type', 'bem')
+                        ->get(),
+                    'bpm' => Calon::with('kelas_ketua')
+                        ->where('type', 'bpm')
+                        ->where('jurusan_id', Auth::user()->jurusan_id)
+                        ->get(),
+                    'hmj' => Calon::with('kelas_ketua', 'kelas')
+                        ->where('type', 'hmj')
+                        ->where('jurusan_id', Auth::user()->jurusan_id)
+                        ->get(),
+                    'user' => User::with('jurusan', 'kelas')
+                        ->where('jurusan_id', Auth::user()->jurusan_id)
+                        ->get()
+                        ->first(),
+                ]);
+            } else {
+                return redirect(route('Upload Foto Mahasiswa'));
+            }
         } else {
             return redirect(route('home'));
         }

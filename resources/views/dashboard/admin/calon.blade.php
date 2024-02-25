@@ -31,6 +31,7 @@
                             <select class="btn border-secondary dropdown-toggle rounded-pill" name="show" value="PS-3A">
                                 <option class="dropdown-item" value="{{ request('show') }}">{{ request('show') ??
                                     'Default' }}</option>
+                                <option class="dropdown-item" value="1">1</option>
                                 <option class="dropdown-item" value="5">5</option>
                                 <option class="dropdown-item" value="10">10</option>
                                 <option class="dropdown-item" value="25">25</option>
@@ -54,6 +55,18 @@
                                 <option class="dropdown-item" value="5">IK-1A</option>
                                 <option class="dropdown-item" value="6">IK-2A</option>
                                 <option class="dropdown-item" value="7">IK-3A</option>
+                            </select>
+                        </div>
+                        <div class="dropdown open">
+                            <b>Type</b>
+                            <select class="btn border-secondary dropdown-toggle rounded-pill" name="type"
+                                value="PS-3A">
+                                <option class="dropdown-item" value="{{ request('type') }}">{{
+                                    App\Models\Calon::where('type', request('type'))->get()->first()->type ??
+                                    'Default' }}</option>
+                                <option class="dropdown-item" value="BEM">BEM</option>
+                                <option class="dropdown-item" value="BPM">BPM</option>
+                                <option class="dropdown-item" value="HMJ">HMJ</option>
                             </select>
                         </div>
                     </div>
@@ -129,7 +142,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- {{ $users->links() }} --}}
+        {{ $users->links() }}
     </div>
 </div>
 <!-- Modal Import Data Calon -->

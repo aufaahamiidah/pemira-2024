@@ -68,7 +68,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- {{ $classes->links() }} --}}
+        {{ $classes->links() }}
     </div>
 </div>
 <!-- Modal Import Kelas -->

@@ -36,9 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/daftar-mahasiswa/{id}/edit', [UserController::class,'update'])->name('Update Data Mahasiswa');
     Route::get('/daftar-mahasiswa/delete/{id}', [UserController::class,'destroy'])->name('Delete Data Mahasiswa');
 
-    Route::get('/upload-foto-mahasiswa', [HomeController::class,'uploadFoto'])->name('Upload Foto Mahasiswa');
-    Route::post('/update-foto-mahasiswa', [UserController::class,'updateFoto'])->name('Update Foto Mahasiswa');
-
     // Routing Daftar Mahasiswa Susulan
     Route::get('/daftar-mahasiswa-susulan', [HomeController::class,'susulan'])->name('Daftar Mahasiswa Susulan');
     Route::post('/import-mahasiswa-susulan', [UserController::class,'importSusulan'])->name('Import Data Mahasiswa Susulan');
@@ -58,6 +55,8 @@ Route::middleware('auth')->group(function () {
 
     // Routing Pemilihan Raya 2024
     Route::get('/beranda', [HomeController::class, 'beranda'])->name('Beranda');
+    Route::get('/upload-foto-mahasiswa', [HomeController::class,'uploadFoto'])->name('Upload Foto Mahasiswa');
+    Route::post('/update-foto-mahasiswa', [UserController::class,'updateFoto'])->name('Update Foto Mahasiswa');
     // Routing Pemilihan Raya 2024 Himpunan
     Route::get('/pemilihan/hmj/{id}', [HomeController::class,'tampilHMJ'])->name('Pemilihan Ketua Himpunan Mahasiswa Jurusan');
     Route::post('/pemilihan/hmj/submit', [CalonController::class,'submitHMJ'])->name('submitHMJ');
