@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Imports\UsersImportSusulan;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('auth.login', [
-            'title' => 'Login | Pemilihan Raya 2024'
-        ]);
+        $tgl = Carbon::now()->locale('ms')->isoFormat('kk');
+        
+        if($tgl >= '16' || $tgl == '00'){
+            return back()->with('error', 'Jam Operasional Website Pukul 07.00 - 23.00 WIB');
+        } else {
+            return view('auth.login', [
+                'title' => 'Login | Pemilihan Raya 2024'
+            ]);
+        }
     }
 
     /**

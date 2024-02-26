@@ -86,27 +86,27 @@
                             <div class="p-3">
                                 <div class="form-check card">
                                     <h5 class="card-header text-center font-weight-bold bg-primary text-white mb-3">{{ $item->no_urut }}</h5>
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <img src="{{ $item->foto_ketua ?? 'assets/profile.jpeg' }}" alt="foto_ketua" width="200">
-                                            <h5 class="card-title mt-3">{{ $item->nama_ketua }}</h5>
+                                    <input class="form-check-input" type="radio" name="bem" form="vote" id="bem{{ $item->id }}"
+                                    value="{{ $item->id }}">
+                                    <label for="bem{{ $item->id }}">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <img src="{{ $item->foto_ketua ?? 'assets/profile.jpeg' }}" alt="foto_ketua" width="200">
+                                                <h5 class="card-title mt-3">{{ $item->nama_ketua }}</h5>
+                                            </div>
+                                            <div class="col text-center">
+                                                <img src="{{ $item->foto_wakil ?? 'assets/profile.jpeg' }}" alt="foto_wakil" width="200">
+                                                <h5 class="card-title mt-3">{{ $item->nama_wakil }}</h5>
+                                            </div>
                                         </div>
-                                        <div class="col text-center">
-                                            <img src="{{ $item->foto_wakil ?? 'assets/profile.jpeg' }}" alt="foto_wakil" width="200">
-                                            <h5 class="card-title mt-3">{{ $item->nama_wakil }}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <label for="bem{{ $item->id }}">
+                                        <div class="card-body text-center">
                                             <hr>
                                             <h6 class="card-text">Visi</h6>
                                             <p class="card-text">{{ $item->visi }}</p>
                                             <h6 class="card-text">Misi</h6>
                                             <p class="card-text">{{ $item->misi }}</p>
-                                        </label>
-                                        <input class="form-check-input" type="radio" name="bem" form="vote" id="bem{{ $item->id }}"
-                                            value="{{ $item->id }}">
-                                    </div>
+                                        </div>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -135,27 +135,27 @@
                             <div class="p-3">
                                 <div class="form-check card">
                                     <h5 class="card-header text-center font-weight-bold bg-primary text-white mb-3">{{ $item->no_urut }}</h5>
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <img src="{{ $item->foto_ketua ?? 'assets/profile.jpeg' }}" alt="foto_ketua" width="200">
-                                            <h5 class="card-title mt-3">{{ $item->nama_ketua }}</h5>
+                                    <input class="form-check-input" type="radio" name="bpm" form="vote" id="bpm{{ $item->id }}"
+                                        value="{{ $item->id }}">
+                                    <label for="bpm{{ $item->id }}">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <img src="{{ $item->foto_ketua ?? 'assets/profile.jpeg' }}" alt="foto_ketua" width="200">
+                                                <h5 class="card-title mt-3">{{ $item->nama_ketua }}</h5>
+                                            </div>
+                                            <div class="col text-center">
+                                                <img src="{{ $item->foto_wakil ?? 'assets/profile.jpeg' }}" alt="foto_wakil" width="200">
+                                                <h5 class="card-title mt-3">{{ $item->nama_wakil }}</h5>
+                                            </div>
                                         </div>
-                                        <div class="col text-center">
-                                            <img src="{{ $item->foto_wakil ?? 'assets/profile.jpeg' }}" alt="foto_wakil" width="200">
-                                            <h5 class="card-title mt-3">{{ $item->nama_wakil }}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <label for="bpm{{ $item->id }}">
+                                        <div class="card-body text-center">
                                             <hr>
                                             <h6 class="card-text">Visi</h6>
                                             <p class="card-text">{{ $item->visi }}</p>
                                             <h6 class="card-text">Misi</h6>
                                             <p class="card-text">{{ $item->misi }}</p>
-                                        </label>
-                                        <input class="form-check-input" type="radio" name="bpm" form="vote" id="bpm{{ $item->id }}"
-                                            value="{{ $item->id }}">
-                                    </div>
+                                        </div>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -194,27 +194,27 @@
                             <div class="p-3">
                                 <div class="form-check card">
                                     <h5 class="card-header text-center font-weight-bold bg-primary text-white mb-3">{{ $item->no_urut }}</h5>
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <img src="{{ $item->foto_ketua ?? 'assets/profile.jpeg' }}" alt="foto_ketua" width="200">
-                                            <h5 class="card-title mt-3">{{ $item->nama_ketua }}</h5>
+                                    <input class="form-check-input" type="radio" name="hmj" form="vote" id="hmj{{ $item->id }}"
+                                        value="{{ $item->id }}">
+                                    <label for="hmj{{ $item->id }}">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <img src="{{ $item->foto_ketua ?? 'assets/profile.jpeg' }}" alt="foto_ketua" width="200">
+                                                <h5 class="card-title mt-3">{{ $item->nama_ketua }}</h5>
+                                            </div>
+                                            <div class="col text-center">
+                                                <img src="{{ $item->foto_wakil ?? 'assets/profile.jpeg' }}" alt="foto_wakil" width="200">
+                                                <h5 class="card-title mt-3">{{ $item->nama_wakil }}</h5>
+                                            </div>
                                         </div>
-                                        <div class="col text-center">
-                                            <img src="{{ $item->foto_wakil ?? 'assets/profile.jpeg' }}" alt="foto_wakil" width="200">
-                                            <h5 class="card-title mt-3">{{ $item->nama_wakil }}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <label for="hmj{{ $item->id }}">
+                                        <div class="card-body text-center">
                                             <hr>
                                             <h6 class="card-text">Visi</h6>
                                             <p class="card-text">{{ $item->visi }}</p>
                                             <h6 class="card-text">Misi</h6>
                                             <p class="card-text">{{ $item->misi }}</p>
-                                        </label>
-                                        <input class="form-check-input" type="radio" name="hmj" form="vote" id="hmj{{ $item->id }}"
-                                            value="{{ $item->id }}">
-                                    </div>
+                                        </div>
+                                    </label>
                                 </div>
                             </div>
                         </div>

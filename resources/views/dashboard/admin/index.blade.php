@@ -232,7 +232,7 @@
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
                 <tr>
-                    <td class="align-middle text-center" colspan="7">Calon Anggota Himpunan Mahasiswa Akuntansi</td>
+                    <td class="align-middle text-center" colspan="7">Calon Ketua Himpunan Mahasiswa Akuntansi</td>
                 </tr>
                 <tr>
                     <td class="align-middle text-center" rowspan="2">No Urut</td>
@@ -266,7 +266,7 @@
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
                 <tr>
-                    <td class="align-middle text-center" colspan="7">Calon Anggota Himpunan Mahasiswa Administrasi Bisnis</td>
+                    <td class="align-middle text-center" colspan="7">Calon Ketua Himpunan Mahasiswa Administrasi Bisnis</td>
                 </tr>
                 <tr>
                     <td class="align-middle text-center" rowspan="2">No Urut</td>
@@ -300,7 +300,7 @@
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
                 <tr>
-                    <td class="align-middle text-center" colspan="7">Calon Anggota Himpunan Mahasiswa Sipil</td>
+                    <td class="align-middle text-center" colspan="7">Calon Ketua Himpunan Mahasiswa Sipil</td>
                 </tr>
                 <tr>
                     <td class="align-middle text-center" rowspan="2">No Urut</td>
@@ -334,7 +334,7 @@
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
                 <tr>
-                    <td class="align-middle text-center" colspan="7">Calon Anggota Himpunan Mahasiswa Elektro</td>
+                    <td class="align-middle text-center" colspan="7">Calon Ketua Himpunan Mahasiswa Elektro</td>
                 </tr>
                 <tr>
                     <td class="align-middle text-center" rowspan="2">No Urut</td>
@@ -368,7 +368,7 @@
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
                 <tr>
-                    <td class="align-middle text-center" colspan="7">Calon Anggota Himpunan Mahasiswa Mesin</td>
+                    <td class="align-middle text-center" colspan="7">Calon Ketua Himpunan Mahasiswa Mesin</td>
                 </tr>
                 <tr>
                     <td class="align-middle text-center" rowspan="2">No Urut</td>
