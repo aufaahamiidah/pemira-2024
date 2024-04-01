@@ -38,14 +38,16 @@ class CalonController extends Controller
             'file' => 'required|mimes:csv,xls,xlsx'
         ]);
 
-        // menangkap file excel
-        $file = $request->file('file');
-
-        // membuat nama file
-        $nama_file = time() . $file->getClientOriginalName();
-
-        // upload ke folder file_calon di dalam folder public
-        $file->move('file_calon', $nama_file);
+        if(isset(request()->file)){
+            // menangkap file excel
+            $file = $request->file('file');
+    
+            // membuat nama file
+            $nama_file = time() . $file->getClientOriginalName();
+    
+            // upload ke folder file_calon di dalam folder public
+            $file->move('file_calon', $nama_file);
+        }
 
         Excel::import(new CalonImport, public_path("/file_calon/$nama_file"));
         return redirect(route('Daftar Calon'))->with('success', 'Anda Telah Berhasil Melakukan Import Data Calon Pemilihan Raya 2024');
@@ -74,13 +76,17 @@ class CalonController extends Controller
     {
         //
         $tujuan_upload = 'assets/foto_calon';
-        $foto_ketua = $request->foto_ketua;
-        $lokasi_file_ketua = time()."-".$foto_ketua->getClientOriginalName();
-		$foto_ketua->move($tujuan_upload,$lokasi_file_ketua);
+        if(isset(request()->foto_ketua)){
+            $foto_ketua = $request->foto_ketua;
+            $lokasi_file_ketua = time()."-".$foto_ketua->getClientOriginalName();
+            $foto_ketua->move($tujuan_upload,$lokasi_file_ketua);
+        }
 
-        $foto_wakil = $request->foto_wakil;
-        $lokasi_file_wakil = time()."-".$foto_wakil->getClientOriginalName();
-		$foto_wakil->move($tujuan_upload,$lokasi_file_wakil);
+        if(isset(request()->foto_wakil)){
+            $foto_wakil = $request->foto_wakil;
+            $lokasi_file_wakil = time()."-".$foto_wakil->getClientOriginalName();
+            $foto_wakil->move($tujuan_upload,$lokasi_file_wakil);
+        }
 
         DB::table('calons')->where('id', $id)->update([
             'nama_ketua'    => $request->nama_ketua,
@@ -89,8 +95,8 @@ class CalonController extends Controller
             'nim_wakil'     => $request->nim_wakil,
             'kelas_ketua_id'=> $request->kelas_ketua,
             'kelas_wakil_id'=> $request->kelas_wakil,
-            'foto_ketua'    => $lokasi_file_ketua,
-            'foto_wakil'    => $lokasi_file_wakil,
+            'foto_ketua'    => $lokasi_file_ketua?? '',
+            'foto_wakil'    => $lokasi_file_wakil?? '',
             'no_urut'       => $request->no_urut,
             'type'          => $request->type,
             'visi'          => $request->visi,
@@ -119,7 +125,12 @@ class CalonController extends Controller
             'hmj_id' => $request->hmj,
             'is_active' => '1',
         ]);
-        return redirect('/beranda')->with('success', 'Anda Telah Berhasil Memilih');
-        
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('success', 'Terima Kasih Atas Partisipasinya🙏');
     }
 }

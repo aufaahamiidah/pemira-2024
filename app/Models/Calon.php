@@ -22,6 +22,7 @@ class Calon extends Model
         "kelas_wakil_id",
         "visi",
         "misi",
+        "jurusan_id",
     ] ;
 
     // Membuat Realtionship Database HasMany BelongsTo

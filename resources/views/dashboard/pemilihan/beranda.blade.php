@@ -86,25 +86,31 @@
                             <div class="p-3">
                                 <div class="form-check card">
                                     <h5 class="card-header text-center font-weight-bold bg-primary text-white mb-3">{{ $item->no_urut }}</h5>
-                                    <input class="form-check-input" type="radio" name="bem" form="vote" id="bem{{ $item->id }}"
-                                    value="{{ $item->id }}">
-                                    <label for="bem{{ $item->id }}">
+                                    <input class="form-check-input" type="radio" name="bem" form="vote" id="bem{{ $item->no_urut }}"
+                                    value="{{ $item->no_urut }}">
+                                    <label for="bem{{ $item->no_urut }}">
                                         <div class="row">
                                             <div class="col text-center">
                                                 <img src="{{ $item->foto_ketua ?? 'assets/profile.jpeg' }}" alt="foto_ketua" width="200">
                                                 <h5 class="card-title mt-3">{{ $item->nama_ketua }}</h5>
                                             </div>
+                                            @if (isset($item->nama_wakil))
                                             <div class="col text-center">
                                                 <img src="{{ $item->foto_wakil ?? 'assets/profile.jpeg' }}" alt="foto_wakil" width="200">
                                                 <h5 class="card-title mt-3">{{ $item->nama_wakil }}</h5>
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="card-body text-center">
                                             <hr>
+                                            @if (isset($item->visi))
                                             <h6 class="card-text">Visi</h6>
-                                            <p class="card-text">{{ $item->visi }}</p>
+                                            <p class="card-text">{!! $item->visi !!}</p>
+                                            @endif
+                                            @if (isset($item->misi))
                                             <h6 class="card-text">Misi</h6>
-                                            <p class="card-text">{{ $item->misi }}</p>
+                                            <p class="card-text">{!! $item->misi !!}</p>
+                                            @endif
                                         </div>
                                     </label>
                                 </div>
@@ -127,7 +133,17 @@
             <div class="modal-body">
                 <div class="title text-center">
                     <img src="assets/BPM.svg" width="120" alt="" class="mb-4">
-                    <h5 style="font-weight: bold; text-align: center;">CALON PRESIDEN DAN WAKIL PRESIDEN MAHASISWA</h5>
+                    @if ($user->jurusan_id == 1)
+                    <h5 style="font-weight: bold; text-align: center;">CALON BADAN PERWAKILAN MAHASISWA AKUNTANSI</h5>
+                    @elseif ($user->jurusan_id == 2)
+                    <h5 style="font-weight: bold; text-align: center;">CALON BADAN PERWAKILAN MAHASISWA ADMINISTRASI BISNIS</h5>
+                    @elseif ($user->jurusan_id == 3)
+                    <h5 style="font-weight: bold; text-align: center;">CALON BADAN PERWAKILAN MAHASISWA ELEKTRO</h5>
+                    @elseif ($user->jurusan_id == 4)
+                    <h5 style="font-weight: bold; text-align: center;">CALON BADAN PERWAKILAN MAHASISWA SIPIL</h5>
+                    @elseif ($user->jurusan_id == 5)
+                    <h5 style="font-weight: bold; text-align: center;">CALON BADAN PERWAKILAN MAHASISWA MESIN</h5>
+                    @endif
                 </div>
                     <div class="decision row">
                         @foreach ($bpm as $item)
@@ -135,25 +151,31 @@
                             <div class="p-3">
                                 <div class="form-check card">
                                     <h5 class="card-header text-center font-weight-bold bg-primary text-white mb-3">{{ $item->no_urut }}</h5>
-                                    <input class="form-check-input" type="radio" name="bpm" form="vote" id="bpm{{ $item->id }}"
-                                        value="{{ $item->id }}">
-                                    <label for="bpm{{ $item->id }}">
+                                    <input class="form-check-input" type="radio" name="bpm" form="vote" id="bpm{{ $item->no_urut }}"
+                                        value="{{ $item->no_urut }}">
+                                    <label for="bpm{{ $item->no_urut }}">
                                         <div class="row">
                                             <div class="col text-center">
                                                 <img src="{{ $item->foto_ketua ?? 'assets/profile.jpeg' }}" alt="foto_ketua" width="200">
                                                 <h5 class="card-title mt-3">{{ $item->nama_ketua }}</h5>
                                             </div>
+                                            @if (isset($item->nama_wakil))
                                             <div class="col text-center">
                                                 <img src="{{ $item->foto_wakil ?? 'assets/profile.jpeg' }}" alt="foto_wakil" width="200">
                                                 <h5 class="card-title mt-3">{{ $item->nama_wakil }}</h5>
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="card-body text-center">
                                             <hr>
+                                            @if (isset($item->visi))
                                             <h6 class="card-text">Visi</h6>
-                                            <p class="card-text">{{ $item->visi }}</p>
+                                            <p class="card-text">{!! $item->visi !!}</p>
+                                            @endif
+                                            @if (isset($item->misi))
                                             <h6 class="card-text">Misi</h6>
-                                            <p class="card-text">{{ $item->misi }}</p>
+                                            <p class="card-text">{!! $item->misi !!}</p>
+                                            @endif
                                         </div>
                                     </label>
                                 </div>
@@ -177,16 +199,20 @@
                 <div class="title text-center">
                     @if ($user->jurusan_id == 1)
                     <img src="assets/HIMA.svg" width="120" alt="" class="mb-4">
+                    <h5 style="font-weight: bold; text-align: center;">CALON Himpunan Mahasiswa Jurusan Akuntansi</h5>
                     @elseif ($user->jurusan_id == 2)
                     <img src="assets/HMAB.svg" width="120" alt="" class="mb-4">
+                    <h5 style="font-weight: bold; text-align: center;">CALON Himpunan Mahasiswa Jurusan Administrasi Bisnis</h5>
                     @elseif ($user->jurusan_id == 3)
                     <img src="assets/HME.svg" width="120" alt="" class="mb-4">
+                    <h5 style="font-weight: bold; text-align: center;">CALON Himpunan Mahasiswa Jurusan Elektro</h5>
                     @elseif ($user->jurusan_id == 4)
                     <img src="assets/HMS.svg" width="120" alt="" class="mb-4">
+                    <h5 style="font-weight: bold; text-align: center;">CALON Himpunan Mahasiswa Jurusan Sipil</h5>
                     @elseif ($user->jurusan_id == 5)
                     <img src="assets/HMM.svg" width="120" alt="" class="mb-4">
+                    <h5 style="font-weight: bold; text-align: center;">CALON Himpunan Mahasiswa Jurusan Mesin</h5>
                     @endif
-                    <h5 style="font-weight: bold; text-align: center;">CALON PRESIDEN DAN WAKIL PRESIDEN MAHASISWA</h5>
                 </div>
                     <div class="decision row">
                         @foreach ($hmj as $item)
@@ -194,25 +220,31 @@
                             <div class="p-3">
                                 <div class="form-check card">
                                     <h5 class="card-header text-center font-weight-bold bg-primary text-white mb-3">{{ $item->no_urut }}</h5>
-                                    <input class="form-check-input" type="radio" name="hmj" form="vote" id="hmj{{ $item->id }}"
-                                        value="{{ $item->id }}">
-                                    <label for="hmj{{ $item->id }}">
+                                    <input class="form-check-input" type="radio" name="hmj" form="vote" id="hmj{{ $item->no_urut }}"
+                                        value="{{ $item->no_urut }}">
+                                    <label for="hmj{{ $item->no_urut }}">
                                         <div class="row">
                                             <div class="col text-center">
                                                 <img src="{{ $item->foto_ketua ?? 'assets/profile.jpeg' }}" alt="foto_ketua" width="200">
                                                 <h5 class="card-title mt-3">{{ $item->nama_ketua }}</h5>
                                             </div>
+                                            @if (isset($item->nama_wakil))
                                             <div class="col text-center">
                                                 <img src="{{ $item->foto_wakil ?? 'assets/profile.jpeg' }}" alt="foto_wakil" width="200">
                                                 <h5 class="card-title mt-3">{{ $item->nama_wakil }}</h5>
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="card-body text-center">
                                             <hr>
+                                            @if (isset($item->visi))
                                             <h6 class="card-text">Visi</h6>
-                                            <p class="card-text">{{ $item->visi }}</p>
+                                            <p class="card-text">{!! $item->visi !!}</p>
+                                            @endif
+                                            @if (isset($item->misi))
                                             <h6 class="card-text">Misi</h6>
-                                            <p class="card-text">{{ $item->misi }}</p>
+                                            <p class="card-text">{!! $item->misi !!}</p>
+                                            @endif
                                         </div>
                                     </label>
                                 </div>
@@ -231,24 +263,6 @@
     function submitBEM(e) {
         e.preventDefault();
 
-        var bem = document.getElementsByName('bem');
-        var selectedBEM = false;
-        for (let i = 0; i < bem.length; i++) {
-            if (bem[i].checked) {
-                selectedBEM = true;
-                break;
-            }
-        }
-        //Tampilkan pesan error jika tidak ada pilihan
-        if(!selectedBEM){
-            Swal.fire({
-                icon: 'error',
-                title: 'Pilihan Presma Wapresma belum dipilih',
-                text: 'Mohon pilih salah satu',
-            });
-            return;
-        }
-
         //konfirmasi ulang pilihan
         Swal.fire({
             icon: 'success',
@@ -265,24 +279,6 @@
 
     function submitBPM(e){
         e.preventDefault();
-        var bpm = document.getElementsByName('bpm');
-        var selectedBPM = false;
-        for (let i = 0; i < bpm.length; i++) {
-            if (bpm[i].checked) {
-                selectedBPM = true;
-                break;
-            }
-        }
-
-        //Tampilkan pesan error jika tidak ada pilihan
-        if(!selectedBPM){
-            swal({
-                icon: 'error',
-                title: 'Pilihan BPM belum dipilih',
-                text: 'Mohon pilih salah satu',
-            });
-            return;
-        }
         //konfirmasi ulang pilihan
         Swal.fire({
             icon: 'success',
@@ -298,23 +294,6 @@
     }
     function submitHMJ(e) {
         e.preventDefault();
-        var hmj = document.getElementsByName('hmj');
-        var selectedHMJ = false;
-        for (let i = 0; i < hmj.length; i++) {
-            if (hmj[i].checked) {
-                selectedHMJ = true;
-                break;
-            }
-        }
-        if (!selectedHMJ) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Pilihan Ketua Himpunan belum dipilih',
-                text: 'Mohon pilih salah satu',
-            });
-            return;
-
-        }
         //konfirmasi ulang pilihan
         Swal.fire({
             icon: 'success',
@@ -331,52 +310,34 @@
 
     function konfirmasiPilihan(e){
         e.preventDefault();
-        
         var bem = document.getElementsByName('bem');
-        var selectedBEM = false;
+        var selected = false;
         for (let i = 0; i < bem.length; i++) {
             if (bem[i].checked) {
-                selectedBEM = true;
+                selected = true;
                 break;
             }
         }
         var hmj = document.getElementsByName('hmj');
-        var selectedHMJ = false;
         for (let i = 0; i < hmj.length; i++) {
             if (hmj[i].checked) {
-                selectedHMJ = true;
+                selected = true;
                 break;
             }
         }
         var bpm = document.getElementsByName('bpm');
-        var selectedBPM = false;
         for (let i = 0; i < bpm.length; i++) {
             if (bpm[i].checked) {
-                selectedBPM = true;
+                selected = true;
                 break;
             }
         }
+        
         //Tampilkan pesan error jika tidak ada pilihan
-        if(!selectedBEM){
+        if(selected == false){
             Swal.fire({
                 icon: 'error',
-                title: 'Anda Belum Memilih Calon Badan Eksekutif Mahasiswa',
-                text: 'Mohon pilih salah satu',
-            });
-            return;
-        }
-        if(!selectedBPM){
-            Swal.fire({
-                icon: 'error',
-                title: 'Anda Belum Memilih Calon Badan Pengawas Mahasiswa',
-                text: 'Mohon pilih salah satu',
-            });
-            return;
-        }
-        if(!selectedHMJ){
-            Swal.fire({
-                icon: 'error',
-                title: 'Anda Belum Memilih Calon Himpunan Jurusan',
+                title: 'Anda Belum Memilih Lembaga Apapun',
                 text: 'Mohon pilih salah satu',
             });
             return;

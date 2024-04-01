@@ -1,4 +1,4 @@
-@extends('layouts.main') @section('container')
+@extends('layouts.main') @section('container-fluid')
 
 <h2 class="text-center mt-5 title" style="border-bottom-color: blue;">Jumlah Calon</h2>
 <div class="row mt-4 baris-chart">
@@ -43,18 +43,13 @@
                         </div>
                         <div class="dropdown open">
                             <b>Kelas</b>
-                            <select class="btn border-secondary dropdown-toggle rounded-pill" name="kelas"
-                                value="PS-3A">
+                            <select class="btn border-secondary dropdown-toggle rounded-pill" name="kelas">
                                 <option class="dropdown-item" value="{{ request('kelas') }}">{{
                                     App\Models\Kelas::where('id', request('kelas'))->get()->first()->nama_kelas ??
                                     'Default' }}</option>
-                                <option class="dropdown-item" value="1">PS-1A</option>
-                                <option class="dropdown-item" value="2">PS-2A</option>
-                                <option class="dropdown-item" value="3">PS-3A</option>
-                                <option class="dropdown-item" value="4">PS-4A</option>
-                                <option class="dropdown-item" value="5">IK-1A</option>
-                                <option class="dropdown-item" value="6">IK-2A</option>
-                                <option class="dropdown-item" value="7">IK-3A</option>
+                                    @foreach ($classes as $class)
+                                    <option class="dropdown-item" value="{{ $class->id }}">{{ $class->nama_kelas }}</option>
+                                    @endforeach
                             </select>
                         </div>
                         <div class="dropdown open">
@@ -118,11 +113,11 @@
                         <span class="text-primary"><b>{{ $user->nim_wakil }}</b></span>
                     </td>
                     <td class="text-center">{{ $user->type }}</td>
-                    <td class="text-center">{{ $user->no_urut }}</td>
-                    <td class="text-center"><span class="text-success"><b>{{ $user->kelas_ketua->nama_kelas
+                    <td class="text-center">{{ $user->id }}</td>
+                    <td class="text-center"><span class="text-success"><b>{{ $user->kelas_ketua->nama_kelas?? ''
                                 }}</b></span>
                         |
-                        <span class="text-primary"><b>{{ $user->kelas_wakil->nama_kelas }}</b></span>
+                        <span class="text-primary"><b>{{ $user->kelas_wakil->nama_kelas?? '' }}</b></span>
                     </td>
                     <td class="text-center d-flex justify-content-center gap-1">
                         <button type="button" class="btn btn-sm rounded-pill btn-info" data-bs-toggle="modal"
@@ -200,7 +195,7 @@
                             <div class="col-xl-6 col-sm-12">
                                 <p><b>Nama Ketua</b> : <br> {{ $user->nama_ketua }}</p>
                                 <p><b>NIM Ketua</b> : <br> {{ $user->nim_ketua }}</p>
-                                <p><b>Kelas Ketua</b> : <br> {{ $user->kelas_ketua->nama_kelas }}</p>
+                                <p><b>Kelas Ketua</b> : <br> {{ $user->kelas_ketua->nama_kelas?? '' }}</p>
                             </div>
                         </div>
                     </div>
@@ -210,14 +205,14 @@
                                 <img src="/assets/foto_calon/{{ $user->foto_wakil }}" alt="Gambar Calon Wakil Pemira 2024" style="width: 30vw; max-width: 250px; min-width: 100px;">
                             </div>
                             <div class="col-xl-6 col-sm-12">
-                                <p><b>Nama Wakil Ketua</b> : <br> {{ $user->nama_wakil }}</p>
-                                <p><b>NIM Wakil Ketua</b> : <br> {{ $user->nim_wakil }}</p>
-                                <p><b>Kelas Wakil Ketua</b> : <br> {{ $user->kelas_wakil->nama_kelas }}</p>
+                                <p><b>Nama Wakil Ketua</b> : <br> {{ $user->nama_wakil?? 'data tidak ada' }}</p>
+                                <p><b>NIM Wakil Ketua</b> : <br> {{ $user->nim_wakil?? 'data tidak ada' }}</p>
+                                <p><b>Kelas Wakil Ketua</b> : <br> {{ $user->kelas_wakil->nama_kelas?? 'data tidak ada' }}</p>
                             </div>
                         </div>
                     </div>
-                    <p style="text-align: center"><b>Visi</b> : <br> {{ $user->visi }} </p>
-                    <p style="text-align: center"><b>Misi</b> : <br> {{ $user->misi }} </p>
+                    <p style="text-align: center"><b>Visi</b> : <br> {!! $user->visi?? 'data tidak ada' !!} </p>
+                    <p style="text-align: center"><b>Misi</b> : <br> {!! $user->misi?? 'data tidak ada' !!} </p>
                 </div>
             </div>
         </div>
@@ -252,7 +247,7 @@
                     <div class="mb-3">
                         <label for="nama_wakil" class="form-label">Nama Wakil Ketua :</label>
                         <input class="form-control mb-3" type="text" name="nama_wakil" id="nama_wakil"
-                            value="{{ $user->nama_wakil }}" required>
+                            value="{{ $user->nama_wakil }}">
                     </div>
                     <div class="mb-3">
                         <label for="nim_ketua" class="form-label">NIM Ketua :</label>
@@ -262,41 +257,47 @@
                     <div class="mb-3">
                         <label for="nim_wakil" class="form-label">NIM Wakil Ketua :</label>
                         <input class="form-control mb-3" type="text" name="nim_wakil" id="nim_wakil"
-                            value="{{ $user->nim_wakil }}" required>
+                            value="{{ $user->nim_wakil }}">
                     </div>
                     <div class="mb-3">
                         <label for="foto_ketua" class="form-label">Foto Ketua :</label>
                         <input class="form-control mb-3" type="file" name="foto_ketua" id="foto_ketua"
-                            value="{{ $user->foto_ketua }}" required>
+                            value="{{ $user->foto_ketua }}">
                     </div>
                     <div class="mb-3">
                         <label for="foto_wakil" class="form-label">Foto Ketua :</label>
                         <input class="form-control mb-3" type="file" name="foto_wakil" id="foto_wakil"
-                            value="{{ $user->foto_wakil }}" required>
+                            value="{{ $user->foto_wakil }}">
                     </div>
                     <div class="mb-3">
                         <label for="kelas_ketua" class="form-label">Kelas Ketua :</label>
-                        <select class="form-select mb-3" name="kelas_ketua" id="kelas_ketua" required>
-                            <option value="1">PS-1A</option>
-                            <option value="2">PS-2A</option>
-                            <option value="3">PS-3A</option>
+                        <select class="form-select mb-3" name="kelas_ketua" id="kelas_ketua">
+                            <option class="dropdown-item" value="{{ $user->kelas_ketua_id }}">{{
+                                App\Models\Kelas::where('id', $user->kelas_ketua_id)->get()->first()->nama_kelas ??
+                                'Default' }}</option>
+                                @foreach ($classes as $class)
+                                <option class="dropdown-item" value="{{ $class->id }}">{{ $class->nama_kelas }}</option>
+                                @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="kelas_wakil" class="form-label">Kelas Wakil Ketua :</label>
-                        <select class="form-select mb-3" name="kelas_wakil" id="kelas_wakil" required>
-                            <option value="1">PS-1A</option>
-                            <option value="2">PS-2A</option>
-                            <option value="3">PS-3A</option>
+                        <select class="form-select mb-3" name="kelas_wakil" id="kelas_wakil">
+                            <option class="dropdown-item" value="{{ $user->kelas_wakil_id }}">{{
+                                App\Models\Kelas::where('id', $user->kelas_wakil_id)->get()->first()->nama_kelas ??
+                                'Default' }}</option>
+                                @foreach ($classes as $class)
+                                <option class="dropdown-item" value="{{ $class->id }}">{{ $class->nama_kelas }}</option>
+                                @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <di class="mb-3">
                         <label for="visi" class="form-label">Visi : </label>
-                        <textarea class="form-control" name="visi" id="visi" rows="3">{{ $user->visi }}</textarea>
-                    </div>
-                    <div class="mb-3">
+                        <textarea class="form-control" name="visi" id="visi" rows="3">{!! $user->visi !!}</textarea>
+                    </di>
+                    <div class=mb-3">
                         <label for="misi" class="form-label">Misi : </label>
-                        <textarea class="form-control" name="misi" id="misi" rows="3">{{ $user->misi }}</textarea>
+                        <textarea class="form-control" name="misi" id="misi" rows="3">{!! $user->misi !!}</textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

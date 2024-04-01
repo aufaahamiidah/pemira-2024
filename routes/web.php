@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('Logout');
 
     Route::get('/home', [HomeController::class,'index'])->name('home');
+    Route::get('/user-export', [UserController::class,'userExport'])->name('User Export');
 
     // Routing Daftar Mahasiswa
     Route::get('/daftar-mahasiswa', [HomeController::class,'mahasiswa'])->name('Daftar Mahasiswa');
@@ -72,4 +73,3 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/pemilihan/submit', [CalonController::class, 'submitPilihan'])->name('submitPilihan');
 });
-

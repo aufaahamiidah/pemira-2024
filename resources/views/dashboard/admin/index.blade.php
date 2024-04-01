@@ -14,7 +14,11 @@
         <div class="col-6" style="width: 400px;">
             <canvas id="jmlSuaraSah"></canvas>
         </div>
+        <div class="col-6" style="width: 400px;">
+            <canvas id="jmlSuaraBEM"></canvas>
+        </div>
     </div>
+    @if (Auth::user()->role == 'admin')
     <div class="card-body table-responsive mt-5">
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
@@ -44,15 +48,15 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $bem->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('jurusan_id', '1')->where('bem_id', $bem->no_urut)->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('jurusan_id', '2')->where('bem_id', $bem->no_urut)->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('jurusan_id', '3')->where('bem_id', $bem->no_urut)->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('jurusan_id', '4')->where('bem_id', $bem->no_urut)->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('jurusan_id', '5')->where('bem_id', $bem->no_urut)->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bem_id', $bem->no_urut)->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bem_id', $bem->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bem_id', $bem->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bem_id', $bem->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('jurusan_id', '1')->where('bem_id', $bem->id)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('jurusan_id', '2')->where('bem_id', $bem->id)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('jurusan_id', '3')->where('bem_id', $bem->id)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('jurusan_id', '4')->where('bem_id', $bem->id)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('jurusan_id', '5')->where('bem_id', $bem->id)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bem_id', $bem->id)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bem_id', $bem->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bem_id', $bem->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bem_id', $bem->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -82,11 +86,11 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $bpm->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->count() }}</td>
                     <td class="text-center">{{ App\Models\User::where('bpm_id', '!=', null)->where('jurusan_id', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -116,11 +120,11 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $bpm->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->count() }}</td>
                     <td class="text-center">{{ App\Models\User::where('bpm_id', '!=', null)->where('jurusan_id', '2')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -150,11 +154,11 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $bpm->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->count() }}</td>
                     <td class="text-center">{{ App\Models\User::where('bpm_id', '!=', null)->where('jurusan_id', '3')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -184,11 +188,11 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $bpm->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->count() }}</td>
                     <td class="text-center">{{ App\Models\User::where('bpm_id', '!=', null)->where('jurusan_id', '4')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -218,16 +222,18 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $bpm->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->count() }}</td>
                     <td class="text-center">{{ App\Models\User::where('bpm_id', '!=', null)->where('jurusan_id', '5')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('bpm_id', $bpm->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    @endif
+    @if (Auth::User()->role == 'panitia' && Auth::user()->jurusan_id == 1 || Auth::user()->role == 'admin')
     <div class="card-body table-responsive mt-5">
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
@@ -252,16 +258,18 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $hmj->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->count() }}</td>
                     <td class="text-center">{{ App\Models\User::where('hmj_id', '!=', null)->where('jurusan_id', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    @endif
+    @if (Auth::User()->role == 'panitia' && Auth::user()->jurusan_id == 2|| Auth::user()->role == 'admin')
     <div class="card-body table-responsive mt-5">
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
@@ -286,16 +294,18 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $hmj->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->count() }}</td>
                     <td class="text-center">{{ App\Models\User::where('hmj_id', '!=', null)->where('jurusan_id', '2')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    @endif
+    @if (Auth::User()->role == 'panitia' && Auth::user()->jurusan_id == 3 || Auth::user()->role == 'admin')
     <div class="card-body table-responsive mt-5">
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
@@ -320,16 +330,18 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $hmj->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->count() }}</td>
                     <td class="text-center">{{ App\Models\User::where('hmj_id', '!=', null)->where('jurusan_id', '3')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    @endif
+    @if (Auth::User()->role == 'panitia' && Auth::user()->jurusan_id == 4 || Auth::user()->role == 'admin')
     <div class="card-body table-responsive mt-5">
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
@@ -354,16 +366,18 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $hmj->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->count() }}</td>
                     <td class="text-center">{{ App\Models\User::where('hmj_id', '!=', null)->where('jurusan_id', '4')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    @endif
+    @if (Auth::User()->role == 'panitia' && Auth::user()->jurusan_id == 5 || Auth::user()->role == 'admin')
     <div class="card-body table-responsive mt-5">
         <table class="table table-striped table-bordered border-light" >
             <thead class="table-dark">
@@ -388,16 +402,17 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $hmj->nama_ketua }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->count() }}</td>
                     <td class="text-center">{{ App\Models\User::where('hmj_id', '!=', null)->where('jurusan_id', '5')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->where('is_active', '1')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->where('is_active', '0')->count() }}</td>
-                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->no_urut)->count() / App\Models\User::count() * 100 }}%</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '1')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '0')->count() }}</td>
+                    <td class="text-center">{{ App\Models\User::where('hmj_id', $hmj->id)->where('is_active', '1')->count() / App\Models\User::count() * 100 }}%</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    @endif
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="path/to/chartjs/dist/chart.umd.js"></script>
@@ -425,6 +440,24 @@
     }
     });
     new Chart(jmlSuaraSah, {
+    type: 'doughnut',
+    data: {
+        labels: ['Suara Sah', 'Suara Tidak Sah'],
+        datasets: [{
+        label: 'Jumlah Mahasiswa',
+        data: [{{ $suara_sah->count() }}, {{ $suara_tidak_sah->count() }}],
+        backgroundColor: ['#ffce56', '#cc65fe']
+        }]
+    },
+    options: {
+        scales: {
+        y: {
+            beginAtZero: true
+        }
+        }
+    }
+    });
+    new Chart(jmlSuaraBEM, {
     type: 'doughnut',
     data: {
         labels: ['Suara Sah', 'Suara Tidak Sah'],

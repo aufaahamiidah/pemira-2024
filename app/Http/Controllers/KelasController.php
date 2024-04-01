@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\KelasImport;
 use App\Models\Kelas;
 use App\Imports\CalonImport;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class KelasController extends Controller
     {
         // validasi
         $this->validate($request, [
-            'file' => 'required|mimes:csv,xls,xlsx'
+            'file' => 'required|mimes:csv,xls,xlsx,zip'
         ]);
 
         // menangkap file excel
@@ -64,7 +65,7 @@ class KelasController extends Controller
         // upload ke folder file_kelas di dalam folder public
         $file->move('file_kelas', $nama_file);
 
-        Excel::import(new CalonImport, public_path("/file_kelas/$nama_file"));
+        Excel::import(new KelasImport, public_path("/file_kelas/$nama_file"));
         return redirect(route('Daftar Kelas'))->with('success', 'Anda Telah Berhasil Melakukan Import Daftar Kelas Pemilihan Raya 2024');
     }
 

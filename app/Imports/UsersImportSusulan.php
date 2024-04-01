@@ -6,8 +6,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class UsersImportSusulan implements ToModel
+class UsersImportSusulan implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -16,17 +17,17 @@ class UsersImportSusulan implements ToModel
     */
     public function model(array $row)
     {
+        set_time_limit(3000);
         $pass = Str::random(8);
         return new User([
-            //
-            'nama' => $row[0],
-            'nim' => $row[1],
-            'email' => $row[2],
-            'nohp' => $row[3],
+            'nama' => $row['nama'],
+            'nim' => $row['nim'],
+            'email' => $row['email'],
+            'nohp' => $row['nohp'],
             'pass' => $pass,
-            'gender' => $row[4],
-            'kelas_id' => $row[5],
-            'jurusan_id' => $row[6],
+            'gender' => $row['gender'],
+            'kelas_id' => $row['kelas'],
+            'jurusan_id' => $row['jurusan'],
             'role' => 'mahasiswa',
             'status' => 'tidak aktif',
             'is_active' => 1,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Exports\UsersExport;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -19,15 +20,19 @@ class UserController extends Controller
      */
     public function index()
     {
-        $tgl = Carbon::now()->locale('ms')->isoFormat('kk');
-        
-        if($tgl >= '16' || $tgl == '00'){
-            return back()->with('error', 'Jam Operasional Website Pukul 07.00 - 23.00 WIB');
-        } else {
-            return view('auth.login', [
-                'title' => 'Login | Pemilihan Raya 2024'
-            ]);
-        }
+        return view('auth.login', [
+            'title' => 'Login | Pemilihan Raya 2024'
+        ]);
+        // $tgl = Carbon::now()->locale('id')->isoFormat('h');
+        // $tgl = $tgl + 7;
+        // // dd($tgl);
+        // if($tgl >= '9' || $tgl < '7'){
+        //     return back()->with('error', "Jam Operasional Website Pukul 07.00 - 23.00 WIB");
+        // } else {
+        //     return view('auth.login', [
+        //         'title' => 'Login | Pemilihan Raya 2024'
+        //     ]);
+        // }
     }
 
     /**
@@ -67,13 +72,22 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
             if(Auth::user()->role == 'mahasiswa'){
+                if(Auth::user()->is_active == 1){
+                    Auth::logout();
+            
+                    session()->invalidate();
+            
+                    session()->regenerateToken();
+                    
+                    return redirect(route('login'))->with('error', 'Mohon maaf 🙏 anda Sudah melakukan pemilihan');
+                }
                 return redirect('/beranda');
             }else{
                 return redirect('/home');
             }
         }
+
 
         return back()->with('error', 'Login Failed!! Please Retry Login');
     }
@@ -133,6 +147,11 @@ class UserController extends Controller
 
         Excel::import(new UsersImportSusulan, public_path("/file_susulan/$nama_file"));
         return redirect('/daftar-mahasiswa-susulan')->with('success', 'Anda Telah Berhasil Melakukan Import Data Peserta Magang/Susulan Pemilihan Raya');
+    }
+
+    // Import Seluruh User
+    public function userExport(){
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     /**

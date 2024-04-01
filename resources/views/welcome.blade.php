@@ -19,6 +19,13 @@
     </div>
     @endif
     <img src="assets/pemira.svg" style="width: 30vw; min-width: 100px; max-width: 200px; margin-top: 10vh"><br>
+    @if( session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {!! session('success') !!}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @else
     <a class="btn btn-primary fs-6" href="{{ route('login') }}" style="margin-top: 10vh">Masuk</a>
+    @endif
 </main>
 @endsection

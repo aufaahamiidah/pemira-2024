@@ -57,16 +57,19 @@ class HomeController extends Controller
             if (request(['search', 'kelas', 'show'])) {
                 // Jika Menggunakan Filter
                 // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
-                $users = User::with('kelas', 'jurusan', 'bem')->where('status', 'aktif')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 100))->withQueryString();
+                $users = User::with('kelas', 'jurusan', 'bem')->where('status', 'aktif')->where('role', 'mahasiswa')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 100))->withQueryString();
             } else {
                 // Jika tidak menggunakan Filter
-                $users = User::with('kelas', 'jurusan', 'bem')->where('status', 'aktif')->paginate(100);
+                $users = User::with('kelas', 'jurusan', 'bem')->where('status', 'aktif')->where('role', 'mahasiswa')->paginate(100);
             }
+
+            $classes = Kelas::get();
     
             return view("dashboard.admin.mahasiswa", [
                 "title" => "Daftar Mahasiswa | Pemilihan Raya 2024",
                 "active" => "mahasiswa",
                 "users" => $users,
+                "classes" => $classes,
             ]);
         }
     }
@@ -80,16 +83,18 @@ class HomeController extends Controller
             if (request(['search', 'kelas', 'show'])) {
                 // Jika Menggunakan Filter
                 // with() menggunakan Relationship Database(Eloquent ORM Laravel), paginate() Menggunakan Pagination Database
-                $users = User::with('kelas', 'jurusan')->where('status', 'tidak aktif')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
+                $users = User::with('kelas', 'jurusan')->where('status', 'tidak aktif')->where('role', 'mahasiswa')->filter(request(['search', 'kelas']))->paginate((request('show') ?? 10))->withQueryString();
             } else {
                 // Jika tidak menggunakan Filter
-                $users = User::with('kelas', 'jurusan')->where('status', 'tidak aktif')->paginate(10);
+                $users = User::with('kelas', 'jurusan')->where('status', 'tidak aktif')->where('role', 'mahasiswa')->paginate(100);
             }
     
+            $classes = Kelas::get();
             return view("dashboard.admin.susulan", [
                 "title" => "Daftar Mahasiswa Susulan | Pemilihan Raya 2024",
                 "active" => "susulan",
                 "users" => $users,
+                "classes" => $classes,
             ]);
         }
     }
@@ -108,12 +113,14 @@ class HomeController extends Controller
                 $users = Calon::with('kelas', 'kelas_ketua', 'kelas_wakil')->paginate(10);
             }
     
+            $classes = Kelas::get();
             // dd($users[0]->kelas_ketua->nama_kelas);
             return view("dashboard.admin.calon", [
                 "title" => "Daftar Calon | Pemilihan Raya 2024",
                 "active" => "calon",
                 "users" => $users,
                 "data"  => Calon::with('kelas'),
+                "classes" => $classes,
             ]);
         }
     }
@@ -132,7 +139,9 @@ class HomeController extends Controller
     public function beranda()
     {
         if(Auth::user()->role == 'mahasiswa'){
-            if(Auth::user()->status == 'aktif'){
+            if(Auth::user()->status == 'tidak aktif' && Auth::user()->foto == null){
+                return redirect(route('Upload Foto Mahasiswa'));
+            } else {
                 return view('dashboard.pemilihan.beranda', [
                     'title' => 'Pemilihan Raya 2024',
                     'bem' => Calon::with('kelas_ketua', 'kelas')
@@ -151,8 +160,6 @@ class HomeController extends Controller
                         ->get()
                         ->first(),
                 ]);
-            } else {
-                return redirect(route('Upload Foto Mahasiswa'));
             }
         } else {
             return redirect(route('home'));

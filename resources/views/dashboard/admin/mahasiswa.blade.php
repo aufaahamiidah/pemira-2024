@@ -42,13 +42,9 @@
                                 <option class="dropdown-item" value="{{ request('kelas') }}">{{
                                     App\Models\Kelas::where('id', request('kelas'))->get()->first()->nama_kelas ??
                                     'Default' }}</option>
-                                <option class="dropdown-item" value="1">PS-1A</option>
-                                <option class="dropdown-item" value="2">PS-2A</option>
-                                <option class="dropdown-item" value="3">PS-3A</option>
-                                <option class="dropdown-item" value="4">PS-4A</option>
-                                <option class="dropdown-item" value="5">IK-1A</option>
-                                <option class="dropdown-item" value="6">IK-2A</option>
-                                <option class="dropdown-item" value="7">IK-3A</option>
+                                    @foreach ($classes as $class)
+                                    <option class="dropdown-item" value="{{ $class->id }}">{{ $class->nama_kelas }}</option>
+                                    @endforeach
                             </select>
                         </div>
                     </div>
@@ -99,9 +95,9 @@
                     <td>{{ $user->pass }}</td>
                     <td>{{ $user->kelas->nama_kelas }}</td>
                     <td>{{ $user->jurusan->nama_jurusan }}</td>
-                    <td class="text-center">{{ $user->bem->id ?? '❌' }}</td>
-                    <td class="text-center">{{ $user->bpm->id ?? '❌' }}</td>
-                    <td class="text-center">{{ $user->hmj->id ?? '❌' }}</td>
+                    <td class="text-center">{{ $user->bem->no_urut ?? '❌' }}</td>
+                    <td class="text-center">{{ $user->bpm->no_urut ?? '❌' }}</td>
+                    <td class="text-center">{{ $user->hmj->no_urut ?? '❌' }}</td>
                     <td class="text-center d-flex justify-content-center gap-1">
                         <button type="button" class="btn btn-sm rounded-pill btn-warning" data-bs-toggle="modal"
                             data-bs-target="#editModal{{ $user->id }}">
@@ -176,8 +172,7 @@
                     <label for="nim" class="form-label">NIM :</label>
                     <input class="form-control mb-3" type="text" name="nim" id="nim" value="{{ $user->nim }}" required>
                     <label for="nohp" class="form-label">No HP :</label>
-                    <input class="form-control mb-3" type="text" name="nohp" id="nohp" value="{{ $user->nohp }}"
-                        required>
+                    <input class="form-control mb-3" type="text" name="nohp" id="nohp" value="{{ $user->nohp }}">
                     <label for="gender" class="form-label">Jenis Kelamin :</label>
                     <select class="form-select mb-3" name="gender" id="gender" required>
                         <option value="L">Laki - Laki</option>
@@ -185,10 +180,12 @@
                     </select>
                     <label for="kelas" class="form-label">Kelas :</label>
                     <select class="form-select mb-3" name="kelas" id="kelas" required>
-                        <option value="1">PS - 1A</option>
-                        <option value="2">PS - 2A</option>
-                        <option value="3">PS - 3A</option>
-                        <option value="4">PS - 4A</option>
+                        <option class="dropdown-item" value="{{ $user->kelas_id }}">{{
+                            App\Models\Kelas::where('id', $user->kelas_id)->get()->first()->nama_kelas ??
+                            'Default' }}</option>
+                        @foreach ($classes as $class)
+                        <option class="dropdown-item" value="{{ $class->id }}">{{ $class->nama_kelas }}</option>
+                        @endforeach
                     </select>
                     <label for="status" class="form-label">Status Mahasiswa :</label>
                     <select class="form-select mb-3" name="status" id="status" required>

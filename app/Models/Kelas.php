@@ -15,6 +15,11 @@ class Kelas extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "nama",
+        "nama_kelas",
+        "jurusan_id",
+    ] ;
     // Membuat Realtionship Database HasMany BelongsTo
     public function user() : HasMany  {
         return $this->HasMany(User::class);
